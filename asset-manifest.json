@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/lalor-dental/static/css/main.e6c13ad2.css",
-    "main.js": "/lalor-dental/static/js/main.73728888.js",
+    "main.js": "/lalor-dental/static/js/main.b804dbfc.js",
     "static/js/453.ba0ba186.chunk.js": "/lalor-dental/static/js/453.ba0ba186.chunk.js",
+    "static/media/logo.png": "/lalor-dental/static/media/logo.41198dac6079880066fb.png",
     "index.html": "/lalor-dental/index.html",
     "main.e6c13ad2.css.map": "/lalor-dental/static/css/main.e6c13ad2.css.map",
-    "main.73728888.js.map": "/lalor-dental/static/js/main.73728888.js.map",
+    "main.b804dbfc.js.map": "/lalor-dental/static/js/main.b804dbfc.js.map",
     "453.ba0ba186.chunk.js.map": "/lalor-dental/static/js/453.ba0ba186.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.73728888.js"
+    "static/js/main.b804dbfc.js"
   ]
 }
