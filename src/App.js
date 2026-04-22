@@ -62,11 +62,7 @@ function Navbar({ page, go, mobileOpen, setMobileOpen }) {
         display:"flex", alignItems:"center", justifyContent:"space-between", height:68 }}>
         {/* Logo */}
         <div onClick={() => go("home")} style={{ cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
-          <div style={{ width:40, height:40, borderRadius:"50%",
-            background:"linear-gradient(135deg,#0a3550,#0891b2)",
-            display:"flex", alignItems:"center", justifyContent:"center" }}>
-            <Smile size={20} color="white" />
-          </div>
+          <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ height:75, objectFit:"contain" }} />
           <div>
             <div className="serif" style={{ fontSize:17, fontWeight:700, color:"#0a3550", lineHeight:1.1 }}>Lalor Dental</div>
             <div style={{ fontSize:9, color:"#0891b2", letterSpacing:"0.12em", textTransform:"uppercase", fontWeight:600 }}>Clinic</div>
@@ -204,7 +200,7 @@ function HomePage({ go }) {
                 display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
                 border:"4px solid rgba(8,145,178,.35)",
                 boxShadow:"0 28px 70px rgba(0,0,0,.3)" }}>
-                <div style={{ fontSize:88, marginBottom:10 }}>👨‍⚕️</div>
+                <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ width:180, height:180, objectFit:"contain" }} />
                 <div className="serif" style={{ color:"white", fontSize:17, fontWeight:600 }}>Dr. Eyad Almashaal</div>
                 <div style={{ color:"rgba(255,255,255,.6)", fontSize:13, marginTop:5 }}>Principal Dentist · BDS</div>
               </div>
@@ -362,7 +358,7 @@ function HomePage({ go }) {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section style={{ padding:"96px 24px", background:"#f8fafc" }}>
+      {/* <section style={{ padding:"96px 24px", background:"#f8fafc" }}>
         <div style={{ maxWidth:820, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:48 }}>
             <div style={{ display:"inline-block", background:"#e0f7fa", color:"#0891b2",
@@ -397,14 +393,15 @@ function HomePage({ go }) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── FINAL CTA ── */}
       <section style={{ padding:"80px 24px", background:"white" }}>
-        <div style={{ maxWidth:660, margin:"0 auto", textAlign:"center" }}>
-          <h2 className="serif" style={{ fontSize:"clamp(30px,4vw,54px)", color:"#0a3550", fontWeight:600, marginBottom:14 }}>
+        <div style={{ maxWidth:660, margin:"0 auto", textAlign:"center", display:"flex", flexDirection:"column", alignItems:"center" }}>
+          <img src={require('./logo.png')} alt="Lalor Dental Logo"
+           style={{ width:630, height:480, objectFit:"contain", marginBottom:10 }} />
             Ready for a Healthier Smile?
-          </h2>
+          
           <p style={{ fontSize:17, color:"#64748b", marginBottom:36, lineHeight:1.72 }}>
             Book your appointment today and take the first step toward the smile you deserve.
           </p>
@@ -895,8 +892,7 @@ function AdminPage({ go }) {
         flexDirection:"column", position:"fixed", top:0, bottom:0, zIndex:100 }}>
         <div style={{ padding:"22px 18px", borderBottom:"1px solid rgba(255,255,255,.1)" }}>
           <div style={{ display:"flex", alignItems:"center", gap:9 }}>
-            <Smile size={20} color="#22d3ee" />
-            <div>
+          <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ width:36, height:36, objectFit:"contain" }} />            <div>
               <div className="serif" style={{ color:"white", fontSize:15, fontWeight:600 }}>Lalor Dental</div>
               <div style={{ fontSize:9, color:"rgba(255,255,255,.45)", letterSpacing:"0.1em" }}>ADMIN PANEL</div>
             </div>
@@ -1049,11 +1045,7 @@ function Footer({ go }) {
         <div style={{ display:"grid", gridTemplateColumns:"1.5fr 1fr 1fr 1.1fr", gap:44, marginBottom:48 }} className="four-col">
           <div>
             <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14 }}>
-              <div style={{ width:38, height:38, borderRadius:"50%",
-                background:"linear-gradient(135deg,#0a3550,#0891b2)",
-                display:"flex", alignItems:"center", justifyContent:"center" }}>
-                <Smile size={18} color="white" />
-              </div>
+              <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ height:80, objectFit:"contain" }} />
               <div className="serif" style={{ color:"white", fontSize:17, fontWeight:600 }}>Lalor Dental Clinic</div>
             </div>
             <p style={{ fontSize:13, lineHeight:1.82, marginBottom:18 }}>
