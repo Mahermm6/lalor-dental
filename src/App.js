@@ -115,6 +115,7 @@ function Navbar({ page, go, mobileOpen, setMobileOpen }) {
 function HomePage({ go }) {
   const [activeTesti, setActiveTesti] = useState(0);
   const services = [
+    { icon:<Sparkles size={26}/>, title:"Cosmetic & Aesthetic Procedures", desc:"Beyond your smile — we offer facial aesthetics including anti-wrinkle injections (Botox), dermal fillers, lip enhancement, and skin rejuvenation treatments for a naturally refreshed look." },
     { icon:<Smile size={26}/>, title:"General Check-ups", desc:"Comprehensive exams for the whole family, including digital X-rays and cancer screening." },
     { icon:<Sparkles size={26}/>, title:"Teeth Whitening", desc:"Professional in-chair and take-home whitening for a dramatically brighter smile." },
     { icon:<Shield size={26}/>, title:"Dental Implants", desc:"Permanent, natural-looking tooth replacement that fuses with your jawbone." },
@@ -433,6 +434,7 @@ function ServicesPage({ go, targetService }) {
   const { useEffect, useRef } = window.React || require('react');
   const refs = {};
   const all = [
+    { icon:<Sparkles size={30}/>, title:"Cosmetic & Aesthetic Procedures", desc:"Beyond your smile — we offer a full range of facial aesthetic treatments to help you look and feel your best.", feats:["Anti-wrinkle injections (Botox)","Dermal fillers","Lip enhancement & contouring","Skin rejuvenation","Natural-looking results"] },
     { icon:<Smile size={30}/>, title:"General Check-ups", desc:"Comprehensive oral examinations including digital X-rays, gum assessment, and oral cancer screening.", feats:["Digital X-rays","Oral cancer screening","Gum health assessment"] },
     { icon:<Sparkles size={30}/>, title:"Teeth Cleaning", desc:"Professional scale & clean to remove plaque and tartar that regular brushing cannot address.", feats:["Scale & clean","Polish & fluoride","Stain removal"] },
     { icon:<Shield size={30}/>, title:"Dental Fillings", desc:"Restore decayed teeth with natural-looking tooth-coloured composite resin fillings.", feats:["Tooth-coloured composite","Mercury-free","Single visit"] },
