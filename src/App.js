@@ -179,7 +179,7 @@ function HomePage({ go }) {
                 <Phone size={18} /> 0382567501
               </button>
             </div>
-            {/* Stats */}
+            {/* Stats 
             <div style={{ display:"flex", gap:32, marginTop:48, paddingTop:32,
               borderTop:"1px solid rgba(255,255,255,.1)" }}>
               {[["500+","Happy Patients"],["10+","Years Experience"],["5 ★","Google Rating"]].map(([n,l]) => (
@@ -189,6 +189,7 @@ function HomePage({ go }) {
                 </div>
               ))}
             </div>
+            */}
           </div>
           {/* Doctor card */}
           <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
@@ -200,11 +201,11 @@ function HomePage({ go }) {
                 display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
                 border:"4px solid rgba(8,145,178,.35)",
                 boxShadow:"0 28px 70px rgba(0,0,0,.3)" }}>
-                <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ width:180, height:180, objectFit:"contain" }} />
+                <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"  style={{ width:"75%", height:"80%", objectFit:"cover" }} />
                 <div className="serif" style={{ color:"white", fontSize:17, fontWeight:600 }}>Dr. Eyad Almashaal</div>
                 <div style={{ color:"rgba(255,255,255,.6)", fontSize:13, marginTop:5 }}>Principal Dentist · BDS</div>
               </div>
-              {/* Review badge */}
+              {/* Review badge 
               <div style={{ position:"absolute", bottom:24, right:-24,
                 background:"white", borderRadius:14, padding:"12px 16px",
                 boxShadow:"0 10px 30px rgba(0,0,0,.22)",
@@ -215,13 +216,14 @@ function HomePage({ go }) {
                   <div style={{ fontSize:10, color:"#94a3b8" }}>Google Reviews</div>
                 </div>
               </div>
-              {/* Emergency badge */}
+              */}
+              {/* Emergency badge 
               <div style={{ position:"absolute", top:24, left:-16,
                 background:"#0891b2", borderRadius:12, padding:"10px 14px",
                 boxShadow:"0 8px 22px rgba(8,145,178,.4)", textAlign:"center" }}>
                 <div className="serif" style={{ color:"white", fontSize:13, fontWeight:700 }}>Same Day</div>
                 <div style={{ fontSize:10, color:"rgba(255,255,255,.8)" }}>Emergency Care</div>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>
