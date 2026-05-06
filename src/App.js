@@ -38,6 +38,7 @@ function GlobalStyles() {
         .two-col { grid-template-columns: 1fr !important; }
         .four-col { grid-template-columns: 1fr 1fr !important; }
         .hide-mobile { display: none !important; }
+        #hamburger { display: block !important; }
       }
     `}</style>
   );
@@ -85,11 +86,11 @@ function Navbar({ page, go, mobileOpen, setMobileOpen }) {
               display:"flex", alignItems:"center", gap:6 }}>
             <Calendar size={15} /> Book Now
           </button>
-          <div className="hide-mobile" style={{ display:"none" }}>
-            <div onClick={() => setMobileOpen(!mobileOpen)} style={{ cursor:"pointer", padding:8 }}>
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </div>
+          <div style={{ display:"none" }} id="hamburger">
+          <div onClick={() => setMobileOpen(!mobileOpen)} style={{ cursor:"pointer", padding:8 }}>
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </div>
+        </div>
         </div>
       </div>
       {/* Mobile menu */}
