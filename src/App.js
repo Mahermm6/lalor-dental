@@ -196,6 +196,7 @@ function HomePage({ go }) {
             <div style={{ position:"relative", width:360, height:360 }}>
               <div style={{ position:"absolute", inset:-18, borderRadius:"50%",
                 border:"2px dashed rgba(8,145,178,.25)" }} />
+              
               <div style={{ width:"100%", height:"100%", borderRadius:"50%",
                 background:"linear-gradient(135deg,#0d6480,#1a9cb5)",
                 display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
@@ -281,14 +282,10 @@ function HomePage({ go }) {
           gridTemplateColumns:"1fr 1.4fr", gap:68, alignItems:"center" }} className="two-col">
           <div style={{ position:"relative" }}>
             <div style={{ width:"100%", height:440, borderRadius:24,
-              background:"linear-gradient(145deg,#0a3550,#0e6d8a)",
-              display:"flex", alignItems:"center", justifyContent:"center",
+              overflow:"hidden",
               boxShadow:"0 28px 64px rgba(10,53,80,.22)" }}>
-              <div style={{ textAlign:"center" }}>
-                <div style={{ fontSize:96, marginBottom:12 }}>👨‍⚕️</div>
-                <div className="serif" style={{ color:"white", fontSize:20, fontWeight:600 }}>Dr. Eyad Almashaal</div>
-                <div style={{ color:"rgba(255,255,255,.55)", fontSize:13, marginTop:6 }}>BDS · Principal Dentist</div>
-              </div>
+              <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
+                style={{ width:"100%", height:"100%", objectFit:"cover" }} />
             </div>
             <div style={{ position:"absolute", top:-18, right:-18,
               background:"linear-gradient(135deg,#0891b2,#06b6d4)",
@@ -515,12 +512,10 @@ function AboutPage({ go }) {
           display:"grid", gridTemplateColumns:"1fr 1.5fr", gap:72, alignItems:"start" }} className="two-col">
           <div>
             <div style={{ width:"100%", aspectRatio:"4/5", borderRadius:24,
-              background:"linear-gradient(155deg,#0a3550,#0e7490)",
-              display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
+              overflow:"hidden",
               boxShadow:"0 28px 64px rgba(10,53,80,.2)" }}>
-              <div style={{ fontSize:104, marginBottom:14 }}>👨‍⚕️</div>
-              <div className="serif" style={{ color:"white", fontSize:19, fontWeight:600 }}>Dr. Eyad Almashaal</div>
-              <div style={{ color:"rgba(255,255,255,.55)", fontSize:13, marginTop:6 }}>BDS · Principal Dentist</div>
+              <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
+                style={{ width:"100%", height:"100%", objectFit:"cover" }} />
             </div>
             <div style={{ background:"#f8fafc", borderRadius:16, padding:"22px",
               marginTop:18, border:"1px solid rgba(14,116,144,.08)" }}>
