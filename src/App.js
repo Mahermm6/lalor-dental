@@ -10,6 +10,7 @@ import {
    GLOBAL STYLES — Fonts, animations, shared utility classes
    ============================================================ */
 function GlobalStyles() {
+  // #c39748
   return (
     <style>{`
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -19,7 +20,7 @@ function GlobalStyles() {
       .page-enter { animation: pgIn 0.45s ease forwards; }
       @keyframes pgIn { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
       .lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-      .lift:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(10,45,80,0.13); }
+      .lift:hover { transform: translateY(-5px); box-shadow: -5px -4px 42px 0px rgba(10, 45, 80, 0.13) }
       .btn-p { background: linear-gradient(135deg,#0e7490,#0891b2); color:#fff; border:none; cursor:pointer; transition:all .22s ease; }
       .btn-p:hover { background:linear-gradient(135deg,#0a5f75,#0e7490); transform:translateY(-1px); box-shadow:0 8px 22px rgba(14,116,144,.35); }
       .btn-o { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.65); cursor:pointer; transition:all .22s ease; }
@@ -397,10 +398,10 @@ function HomePage({ go }) {
       </section> */}
 
       {/* ── FINAL CTA ── */}
-      <section style={{ padding:"80px 24px", background:"white" }}>
+      <section style={{ padding:"80px 24px", background:"white", overflowX:'hidden' }}>
         <div style={{ maxWidth:660, margin:"0 auto", textAlign:"center", display:"flex", flexDirection:"column", alignItems:"center" }}>
           <img src={require('./logo.png')} alt="Lalor Dental Logo"
-           style={{ width:630, height:480, objectFit:"contain", marginBottom:10 }} />
+           style={{ width:630, height:480, objectFit:"contain", marginBottom:10, maxWidth:'100%' }} />
             Ready for a Healthier Smile?
           
           <p style={{ fontSize:17, color:"#64748b", marginBottom:36, lineHeight:1.72 }}>
@@ -409,7 +410,7 @@ function HomePage({ go }) {
           <div style={{ display:"flex", gap:14, justifyContent:"center", flexWrap:"wrap" }}>
             <button className="btn-p" onClick={() => go("book")}
               style={{ padding:"16px 36px", borderRadius:12, fontSize:16, fontWeight:600,
-                display:"flex", alignItems:"center", gap:8 }}>
+                display:"flex", alignItems:"center", gap:8, background:'#c39748' }}>
               <Calendar size={19} /> Book Appointment
             </button>
             <button style={{ padding:"16px 36px", borderRadius:12, fontSize:16, fontWeight:600,
@@ -467,7 +468,7 @@ function ServicesPage({ go, targetService }) {
     className="lift" style={{ background:"white", borderRadius:20,
     padding:"36px 30px", border:"1px solid rgba(14,116,144,.07)",
     outline: targetService===s.title ? "2px solid #0891b2" : "none",
-    transition:"outline .3s" }}>
+    transition:"all 0.3s ease" }}>
               <div style={{ width:62, height:62, borderRadius:16,
                 background:"linear-gradient(135deg,#e0f7fa,#cffafe)",
                 display:"flex", alignItems:"center", justifyContent:"center",
