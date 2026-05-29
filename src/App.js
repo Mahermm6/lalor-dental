@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Phone, MapPin, Clock, Mail, Star, ChevronRight, Calendar,
   Shield, Heart, Award, Check, Facebook, Instagram, Smile,
@@ -64,7 +64,7 @@ function Navbar({ page, go, mobileOpen, setMobileOpen }) {
         display:"flex", alignItems:"center", justifyContent:"space-between", height:68 }}>
         {/* Logo */}
         <div onClick={() => go("home")} style={{ cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
-          <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ height:75, objectFit:"contain" }} />
+          <img src={require('./logo.png')} alt="Lalor Dental Logo" style={{ height:70, objectFit:"contain" }} />
           <div>
             <div className="serif" style={{ fontSize:17, fontWeight:700, color:"#0a3550", lineHeight:1.1 }}>Lalor Dental</div>
             <div style={{ fontSize:9, color:"#0891b2", letterSpacing:"0.12em", textTransform:"uppercase", fontWeight:600 }}>Clinic</div>
@@ -113,6 +113,136 @@ function Navbar({ page, go, mobileOpen, setMobileOpen }) {
 /* ============================================================
    HOME PAGE — Hero, Services, About preview, Why us, Testimonials, CTA
    ============================================================ */
+
+/* ============================================================
+   FAQ COMPONENT
+   To add a question: copy one { q:"...", a:"..." } block,
+   paste it inside the faqs array, and fill in your question
+   and answer. To remove one, delete the whole block.
+   ============================================================ */
+function FAQList() {
+  const [open, setOpen] = useState(null);
+  const faqs = [
+    {
+      q:"How much do dental implants cost in Australia?",
+      a:"Dental implants are a long-term investment in your smile. Costs vary depending on the number of implants and complexity of your case. Contact us for a personalised quote following a consultation."
+    },
+    {
+      q:"How much does Botox cost?",
+      a:"Anti-wrinkle injection pricing depends on the areas treated and the number of units required. We offer competitive pricing and will provide a full quote during your consultation."
+    },
+    {
+      q:"How long does Botox last?",
+      a:"Anti-wrinkle injections typically last 3 to 4 months. With regular maintenance treatments, many patients find their results last longer over time."
+    },
+    {
+      q:"What is the difference between Botox and dermal fillers?",
+      a:"Botox relaxes muscles to smooth dynamic wrinkles like frown lines and crow's feet. Dermal fillers restore volume to areas like lips, cheeks, and under-eye hollows. Both can be combined for a naturally refreshed appearance."
+    },
+    {
+      q:"How long do dermal fillers last?",
+      a:"Dermal fillers typically last between 6 to 18 months depending on the area treated and the type of filler used. Lip fillers generally last 6 to 12 months."
+    },
+    {
+      q:"Does lip filler hurt?",
+      a:"We apply a topical numbing cream before treatment to ensure your comfort. Most patients describe the sensation as a mild pressure rather than pain. The procedure takes only 15 to 30 minutes."
+    },
+    {
+      q:"Are dental implants better than dentures?",
+      a:"Dental implants are widely considered the gold standard for tooth replacement. Unlike dentures, implants are permanent, feel completely natural, preserve your jawbone, and require no adhesives or removal."
+    },
+    {
+      q:"Do you accept new patients?",
+      a:"Yes! We warmly welcome new patients of all ages. You can book online or call us directly to arrange your first appointment."
+    },
+    {
+      q:"Do you accept emergency dental appointments?",
+      a:"Absolutely. We offer same-day emergency appointments for toothaches, broken teeth, lost fillings, and dental trauma. Call us first thing in the morning and we will do our best to see you that day."
+    },
+    {
+      q:"Do you treat children?",
+      a:"Yes, we love treating children! We create a gentle, fun, and stress-free environment for young patients from their very first visit."
+    },
+    {
+      q:"Do you accept private health insurance?",
+      a:"Yes, we accept all major health funds and have HICAPS available so you can claim on the spot at your appointment."
+    },
+    {
+      q:"Is Botox safe?",
+      a:"Yes. When performed by a qualified and experienced practitioner, anti-wrinkle injections are very safe. We use only medical-grade, TGA-approved products."
+    },
+    {
+      q:"Will my dental procedure hurt?",
+      a:"Modern dentistry prioritises your comfort. We use local anaesthetic for all treatments. Sedation options are also available for anxious patients — just let us know."
+    },
+    {
+      q:"Why do my gums bleed when I brush?",
+      a:"Bleeding gums are usually the first sign of gingivitis — early-stage gum disease caused by plaque buildup. It is very treatable with a professional clean and improved home care. Book a check-up if it persists."
+    },
+    {
+      q:"How often should I visit the dentist?",
+      a:"We recommend a check-up and professional clean every 6 months. Patients with gum disease or a history of cavities may benefit from more frequent visits."
+    },
+    {
+      q:"How long does teeth whitening last?",
+      a:"Results typically last between 1 to 3 years depending on your lifestyle habits such as coffee, tea, red wine, and smoking."
+    },
+    {
+      q:"Is there a dentist near me in Lalor?",
+      a:"Yes! Lalor Dental Clinic is conveniently located in Lalor, Victoria 3075, serving the local community including Thomastown, Epping, Bundoora, and surrounding suburbs."
+    },
+    {
+      q:"Do you offer cosmetic dentistry in Lalor?",
+      a:"Yes. We offer a full range of cosmetic dental and facial aesthetic treatments including teeth whitening, veneers, Botox, and dermal fillers — all in one convenient location in Lalor."
+    },
+    {
+      q:"Do you offer payment plans?",
+      a:"We understand that dental care is an investment. Please speak with our friendly team about flexible payment options available at the clinic."
+    },
+    {
+      q:"How do I book an appointment at Lalor Dental Clinic?",
+      a:"You can book online through our website, call us directly, or send us a message through our Contact page. We respond promptly to all enquiries."
+    },
+  ];
+  return (
+    <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+      {faqs.map((f, i) => (
+        <div key={i} style={{
+          background:"white", borderRadius:14,
+          border:`1px solid ${open===i ? "#0891b2" : "rgba(14,116,144,.08)"}`,
+          overflow:"hidden", transition:"border .2s",
+          boxShadow: open===i ? "0 4px 18px rgba(8,145,178,0.1)" : "0 2px 8px rgba(0,0,0,0.04)"
+        }}>
+          <div onClick={() => setOpen(open===i ? null : i)}
+            style={{ padding:"18px 22px", display:"flex",
+              justifyContent:"space-between", alignItems:"center",
+              cursor:"pointer", gap:16 }}>
+            <span style={{ fontSize:15, fontWeight:600,
+              color:"#0a3550", lineHeight:1.4 }}>{f.q}</span>
+            <div style={{ width:28, height:28, borderRadius:"50%", flexShrink:0,
+              background: open===i ? "#0891b2" : "#e0f7fa",
+              display:"flex", alignItems:"center", justifyContent:"center",
+              transition:"all .2s" }}>
+              <span style={{ color: open===i ? "white" : "#0891b2",
+                fontSize:20, lineHeight:1, marginTop:-2, fontWeight:300 }}>
+                {open===i ? "−" : "+"}
+              </span>
+            </div>
+          </div>
+          {open===i && (
+            <div style={{ padding:"0 22px 18px", fontSize:14,
+              color:"#475569", lineHeight:1.8,
+              borderTop:"1px solid rgba(14,116,144,.08)" }}>
+              <div style={{ paddingTop:14 }}>{f.a}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
 function HomePage({ go }) {
   const [activeTesti, setActiveTesti] = useState(0);
   const services = [
@@ -136,6 +266,69 @@ function HomePage({ go }) {
     { icon:<AlertCircle size={22}/>, title:"Emergency Appointments", desc:"Same-day urgent care when you need it most" },
   ];
 
+  useEffect(() => {
+    // Page title and meta description
+    document.title = "Lalor Dental Clinic | Family Dentist & Cosmetic Clinic in Lalor VIC";
+    const meta = document.createElement('meta');
+    meta.name = 'description';
+    meta.content = 'Lalor Dental Clinic offers general dentistry, dental implants, teeth whitening, Botox and dermal fillers in Lalor VIC 3075. Book your appointment today.';
+    document.head.appendChild(meta);
+
+    // FAQ Schema for Google
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much do dental implants cost in Australia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dental implants are a long-term investment in your smile. Costs vary depending on the number of implants and complexity of your case. Contact us for a personalised quote following a consultation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you accept emergency dental appointments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. We offer same-day emergency appointments for toothaches, broken teeth, lost fillings, and dental trauma. Call us first thing in the morning and we will do our best to see you that day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a dentist near me in Lalor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Lalor Dental Clinic is conveniently located in Lalor, Victoria 3075, serving the local community including Thomastown, Epping, Bundoora, and surrounding suburbs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer cosmetic dentistry in Lalor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer a full range of cosmetic dental and facial aesthetic treatments including teeth whitening, veneers, Botox, and dermal fillers — all in one convenient location in Lalor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does Botox last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anti-wrinkle injections typically last 3 to 4 months. With regular maintenance treatments, many patients find their results last longer over time."
+          }
+        }
+      ]
+    });
+    document.head.appendChild(script);
+    return () => {
+    document.head.removeChild(script);
+    document.head.removeChild(meta);
+  };
+}, []);
   return (
     <div className="page-enter">
       {/* ── HERO ── */}
@@ -333,6 +526,27 @@ function HomePage({ go }) {
       </section>
 
       {/* ── WHY CHOOSE US ── */}
+      {/* ── FAQ SECTION ── */}
+      <section style={{ padding:"96px 24px", background:"#f8fafc" }}>
+        <div style={{ maxWidth:820, margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:52 }}>
+            <div style={{ display:"inline-block", background:"#e0f7fa", color:"#0891b2",
+              padding:"4px 14px", borderRadius:20, fontSize:11, fontWeight:700,
+              letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:12 }}>FAQ</div>
+            <h2 className="serif" style={{ fontSize:"clamp(28px,3.5vw,46px)",
+              color:"#0a3550", fontWeight:600, marginBottom:10 }}>
+              Common Questions
+            </h2>
+            <p style={{ color:"#64748b", fontSize:16, maxWidth:480, margin:"0 auto" }}>
+              Everything you need to know before your visit.
+            </p>
+          </div>
+          <FAQList />
+        </div>
+      </section>
+
+      {/* ── WHY CHOOSE US ── */}
+      <section style={{ padding:"80px 24px", background:"linear-gradient(135deg,#0a3550,#0d6480)" }}></section>
       <section style={{ padding:"80px 24px", background:"linear-gradient(135deg,#0a3550,#0d6480)" }}>
         <div style={{ maxWidth:1100, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:52 }}>
@@ -511,6 +725,7 @@ function AboutPage({ go }) {
           <p style={{ color:"rgba(255,255,255,.68)", fontSize:17 }}>Meet Dr. Eyad Almashaal</p>
         </div>
       </section>
+
       <section style={{ padding:"80px 24px", background:"white" }}>
         <div style={{ maxWidth:1080, margin:"0 auto",
           display:"grid", gridTemplateColumns:"1fr 1.5fr", gap:72, alignItems:"start" }} className="two-col">
@@ -1100,8 +1315,7 @@ function Footer({ go }) {
         </div>
         <div style={{ borderTop:"1px solid rgba(255,255,255,.06)", paddingTop:22,
           display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:10 }}>
-          <div style={{ fontSize:11 }}>© 2025 Lalor Dental Clinic. All rights reserved.</div>
-          <div style={{ display:"flex", gap:18 }}>
+        <div style={{ fontSize:11 }}>© 2025 Lalor Dental Clinic. All rights reserved. All content on this website including text, images, and graphics is the property of Lalor Dental Clinic and may not be reproduced without written permission.</div>          <div style={{ display:"flex", gap:18 }}>
             <span style={{ fontSize:11, cursor:"pointer" }}>Privacy Policy</span>
             <span style={{ fontSize:11, cursor:"pointer" }}>Terms</span>
             <span onClick={()=>go("admin")}
