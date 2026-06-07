@@ -10,6 +10,13 @@ import {
    GLOBAL STYLES — Fonts, animations, shared utility classes
    ============================================================ */
 function GlobalStyles() {
+useEffect(() => {
+  const meta = document.createElement('meta');
+  meta.httpEquiv = 'Content-Security-Policy';
+  meta.content = "default-src 'self' 'unsafe-inline' https:";
+  document.head.appendChild(meta);
+}, []);
+
   // #c39748
   return (
     <style>{`
@@ -396,9 +403,9 @@ function HomePage({ go }) {
               <div style={{ width:"100%", height:"100%", borderRadius:"50%",
                 background:"linear-gradient(135deg,#0d6480,#1a9cb5)",
                 display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
-                border:"4px solid rgba(8,145,178,.35)",
+                border:"4px solid rgba(214, 228, 231, 0.35)",
                 boxShadow:"0 28px 70px rgba(0,0,0,.3)" }}>
-                <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"  style={{ width:"75%", height:"80%", objectFit:"cover" }} />
+                <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"  style={{ width:"66%", height:"80%", objectFit:"cover" }} />
                 <div className="serif" style={{ color:"white", fontSize:17, fontWeight:600 }}>Dr. Eyad Almashaal</div>
                 <div style={{ color:"rgba(255,255,255,.6)", fontSize:13, marginTop:5 }}>Principal Dentist · BDS</div>
               </div>
@@ -481,7 +488,7 @@ function HomePage({ go }) {
               overflow:"hidden",
               boxShadow:"0 28px 64px rgba(10,53,80,.22)" }}>
               <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
-                style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                style={{ width:"10", height:"110%", objectFit:"cover" }} />
             </div>
             <div style={{ position:"absolute", top:-18, right:-18,
               background:"linear-gradient(135deg,#0891b2,#06b6d4)",
