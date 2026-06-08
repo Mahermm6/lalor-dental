@@ -844,7 +844,8 @@ function ContactPage() {
                 <span style={{ fontSize:11, fontWeight:700, color:"#0a3550",
                   textTransform:"uppercase", letterSpacing:"0.08em" }}>Opening Hours</span>
               </div>
-              {[["Monday","By appointment"],["Tuesday","By appointment"],["Wednesday","6:30pm – 9:00pm"],["Thursday","9:00am – 6:00pm"],["Friday","6:30pm – 9:00pm"],["Saturday","6:30pm – 9:00pm"],["Sunday","By appointment"]].map(([d,h]) => (                <div key={day} style={{ display:"flex", justifyContent:"space-between",
+              {[["Monday","By appointment"],["Tuesday","By appointment"],["Wednesday","6:30pm – 9:00pm"],["Thursday","9:00am – 6:00pm"],["Friday","6:30pm – 9:00pm"],["Saturday","6:30pm – 9:00pm"],["Sunday","By appointment"]].map(([day,hrs]) => (  
+                  <div key={day} style={{ display:"flex", justifyContent:"space-between",
                   padding:"8px 0", borderBottom:"1px solid #f8fafc", fontSize:13 }}>
                   <span style={{ color:"#64748b" }}>{day}</span>
                   <span style={{ color:hrs==="Closed"?"#ef4444":"#0a3550", fontWeight:500 }}>{hrs}</span>
@@ -1299,7 +1300,8 @@ function Footer({ go }) {
           <div>
             <div style={{ color:"white", fontWeight:600, fontSize:13,
               marginBottom:16, letterSpacing:"0.06em", textTransform:"uppercase" }}>Hours</div>
-              {[["Monday","By appointment — call us"],["Tuesday","By appointment — call us"],["Wednesday","6:30pm – 9:00pm"],["Thursday","9:00am – 6:00pm"],["Friday","6:30pm – 9:00pm"],["Saturday","6:30pm – 9:00pm"],["Sunday","By appointment — call us"]].map(([day,hrs]) => (              <div key={d} style={{ fontSize:12, marginBottom:8, lineHeight:1.6 }}>
+              {[["Monday","By appointment — call us"],["Tuesday","By appointment — call us"],["Wednesday","6:30pm – 9:00pm"],["Thursday","9:00am – 6:00pm"],["Friday","6:30pm – 9:00pm"],["Saturday","6:30pm – 9:00pm"],["Sunday","By appointment — call us"]].map(([d,h]) => (             
+                <div key={d} style={{ fontSize:12, marginBottom:8, lineHeight:1.6 }}>
                 <span style={{ color:"rgba(255,255,255,.4)" }}>{d}: </span>
                 <span style={{ color:h==="Closed"?"#f87171":"rgba(255,255,255,.8)" }}>{h}</span>
               </div>
