@@ -844,8 +844,7 @@ function ContactPage() {
                 <span style={{ fontSize:11, fontWeight:700, color:"#0a3550",
                   textTransform:"uppercase", letterSpacing:"0.08em" }}>Opening Hours</span>
               </div>
-              {[["Mon – Fri","8:30am – 5:30pm"],["Saturday","9:00am – 1:00pm"],["Sunday","Closed"]].map(([day,hrs]) => (
-                <div key={day} style={{ display:"flex", justifyContent:"space-between",
+              {[["Monday","By appointment"],["Tuesday","By appointment"],["Wednesday","6:30pm – 9:00pm"],["Thursday","9:00am – 6:00pm"],["Friday","6:30pm – 9:00pm"],["Saturday","6:30pm – 9:00pm"],["Sunday","By appointment"]].map(([d,h]) => (                <div key={day} style={{ display:"flex", justifyContent:"space-between",
                   padding:"8px 0", borderBottom:"1px solid #f8fafc", fontSize:13 }}>
                   <span style={{ color:"#64748b" }}>{day}</span>
                   <span style={{ color:hrs==="Closed"?"#ef4444":"#0a3550", fontWeight:500 }}>{hrs}</span>
@@ -1122,6 +1121,7 @@ function AdminPage({ go }) {
           </div>
         </div>
         <div style={{ padding:"14px 10px", flex:1 }}>
+
           {sideItems.map(s => (
             <div key={s.id} onClick={()=>setTab(s.id)}
               className={`tab-btn ${tab===s.id?"active-tab":""}`}
@@ -1211,10 +1211,10 @@ function AdminPage({ go }) {
             <p style={{ fontSize:13, color:"#64748b", marginBottom:20 }}>
               Update clinic opening hours. Changes will reflect across the website.
             </p>
-            {[["Monday","8:30 AM","5:30 PM"],["Tuesday","8:30 AM","5:30 PM"],
-              ["Wednesday","8:30 AM","5:30 PM"],["Thursday","8:30 AM","5:30 PM"],
-              ["Friday","8:30 AM","5:30 PM"],["Saturday","9:00 AM","1:00 PM"],
-              ["Sunday","Closed",""]].map(([day,open,close]) => (
+            {[["Monday","By appointment","Call us"],["Tuesday","By appointment","Call us"],
+              ["Wednesday","6:30 PM","9:00 PM"],["Thursday","9:00 AM","6:00 PM"],
+              ["Friday","6:30 PM","9:00 PM"],["Saturday","6:30 PM","9:00 PM"],
+              ["Sunday","By appointment","Call us"]].map(([day,open,close]) => (
               <div key={day} style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr",
                 gap:10, marginBottom:10, alignItems:"center" }}>
                 <span style={{ fontSize:13, fontWeight:500, color:"#374151" }}>{day}</span>
@@ -1299,8 +1299,7 @@ function Footer({ go }) {
           <div>
             <div style={{ color:"white", fontWeight:600, fontSize:13,
               marginBottom:16, letterSpacing:"0.06em", textTransform:"uppercase" }}>Hours</div>
-            {[["Mon – Fri","8:30am – 5:30pm"],["Saturday","9:00am – 1:00pm"],["Sunday","Closed"]].map(([d,h]) => (
-              <div key={d} style={{ fontSize:12, marginBottom:8, lineHeight:1.6 }}>
+              {[["Monday","By appointment — call us"],["Tuesday","By appointment — call us"],["Wednesday","6:30pm – 9:00pm"],["Thursday","9:00am – 6:00pm"],["Friday","6:30pm – 9:00pm"],["Saturday","6:30pm – 9:00pm"],["Sunday","By appointment — call us"]].map(([day,hrs]) => (              <div key={d} style={{ fontSize:12, marginBottom:8, lineHeight:1.6 }}>
                 <span style={{ color:"rgba(255,255,255,.4)" }}>{d}: </span>
                 <span style={{ color:h==="Closed"?"#f87171":"rgba(255,255,255,.8)" }}>{h}</span>
               </div>
