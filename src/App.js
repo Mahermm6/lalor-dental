@@ -368,7 +368,7 @@ function HomePage({ go }) {
             </h1>
             <p style={{ fontSize:17, color:"rgba(255,255,255,.68)", lineHeight:1.75,
               marginBottom:36, maxWidth:440 }}>
-              Quality dental care for the whole family. Dr. Eyad Almashaal and the team are dedicated to your health and confidence.
+              Healthy Smile, Confident You. Dr. Eyad Almashaal brings over 10 years of experience delivering complete dental and aesthetic care for the whole family.
             </p>
             <div style={{ display:"flex", gap:14, flexWrap:"wrap" }}>
               <button className="btn-p" onClick={() => go("book")}
@@ -763,7 +763,7 @@ function AboutPage({ go }) {
               Dr. Eyad<br/>Almashaal
             </h2>
             {["Dr. Eyad Almashaal is the principal dentist at Lalor Dental Clinic, bringing over a decade of experience in comprehensive family dentistry. He completed his Bachelor of Dental Surgery and has since dedicated his career to providing exceptional dental care to the Lalor community.",
-              "Dr. Almashaal believes great dental care begins with listening — understanding each patient's unique concerns and goals. His gentle, patient-centred approach has helped thousands achieve and maintain healthy, confident smiles.",
+              "With over 10 years of experience, Dr. Almashaal believes great dental care begins with listening — understanding each patient's unique concerns and goals. His gentle, patient-centred approach has helped thousands achieve and maintain healthy, confident smiles.",
               "Outside the clinic, he stays current with the latest advancements through continued professional development, ensuring his patients always benefit from the most modern techniques and technology available."
             ].map((para, i) => (
               <p key={i} style={{ fontSize:15, color:"#475569", lineHeight:1.85, marginBottom:16 }}>{para}</p>
@@ -854,14 +854,18 @@ function ContactPage() {
             </div>
             {/* Social icons */}
             <div style={{ display:"flex", gap:10 }}>
-              {[Facebook,Instagram,MessageSquare].map((Icon,i) => (
-                <div key={i} style={{ width:42, height:42, borderRadius:11, background:"#0a3550",
-                  display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer",
-                  transition:"background .2s" }}
-                  onMouseEnter={e=>e.currentTarget.style.background="#0891b2"}
-                  onMouseLeave={e=>e.currentTarget.style.background="#0a3550"}>
-                  <Icon size={17} color="white" />
-                </div>
+              {[
+                { Icon:Facebook, url:"https://www.facebook.com/share/17wqnvDSLT/" },
+                { Icon:Instagram, url:"https://www.instagram.com/lalordentalclinic" },
+                { Icon:MessageSquare, url:"https://lalordentalclinic.com.au/#contact" }
+              ].map(({Icon,url},i) => (
+                <a key={i} href={url} target="_blank" rel="noopener noreferrer"
+                  style={{ width:34, height:34, borderRadius:8,
+                    background:"rgba(255,255,255,.07)", display:"flex",
+                    alignItems:"center", justifyContent:"center", cursor:"pointer",
+                    textDecoration:"none" }}>
+                  <Icon size={14} color="rgba(255,255,255,.65)" />
+                </a>
               ))}
             </div>
           </div>
@@ -1273,7 +1277,7 @@ function Footer({ go }) {
               <div className="serif" style={{ color:"white", fontSize:17, fontWeight:600 }}>Lalor Dental Clinic</div>
             </div>
             <p style={{ fontSize:13, lineHeight:1.82, marginBottom:18 }}>
-              Quality dental care for the whole family. Serving the Lalor community with compassion and expertise.
+              Healthy Smile, Confident You. Serving Lalor and northern Melbourne suburbs with over 10 years of experience in dental and aesthetic care.
             </p>
             <div style={{ display:"flex", gap:9 }}>
               {[Facebook,Instagram,MessageSquare].map((Icon,i) => (
@@ -1342,7 +1346,12 @@ export default function App() {
  const [page, setPage] = useState("home");
 const [mobileOpen, setMobileOpen] = useState(false);
 const [targetService, setTargetService] = useState(null);
-const go = (p, service = null) => { setPage(p); setMobileOpen(false); setTargetService(service); };
+const go = (p, service = null) => { 
+  setPage(p); 
+  setMobileOpen(false); 
+  setTargetService(service);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
   return (
     <div>
