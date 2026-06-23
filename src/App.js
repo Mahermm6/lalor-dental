@@ -377,11 +377,12 @@ function HomePage({ go }) {
                   display:"flex", alignItems:"center", gap:8 }}>
                 <Calendar size={18} /> Book Appointment
               </button>
-              <button className="btn-o"
+              <a href="tel:0382567501"
                 style={{ padding:"14px 28px", borderRadius:10, fontSize:15, fontWeight:500,
-                  display:"flex", alignItems:"center", gap:8 }}>
+                  display:"flex", alignItems:"center", gap:8, textDecoration:"none",
+                  border:"2px solid rgba(255,255,255,.65)", color:"white" }}>
                 <Phone size={18} /> 0382567501
-              </button>
+              </a>
             </div>
             {/* Stats 
             <div style={{ display:"flex", gap:32, marginTop:48, paddingTop:32,
@@ -472,10 +473,12 @@ function HomePage({ go }) {
             ))}
           </div>
           <div style={{ textAlign:"center", marginTop:38 }}>
-            <button className="btn-p" onClick={() => go("services")}
-              style={{ padding:"12px 28px", borderRadius:10, fontSize:14, fontWeight:600 }}>
-              View All Services
-            </button>
+            <a href="tel:0382567501"
+              className="btn-p"
+              style={{ padding:"14px 28px", borderRadius:10, fontSize:15, fontWeight:600,
+                display:"inline-flex", alignItems:"center", gap:8, textDecoration:"none" }}>
+              <Phone size={17} /> 0382567501
+            </a>
           </div>
         </div>
       </section>
@@ -663,10 +666,18 @@ function ServiceCard({ s, go }) {
       boxShadow: open?"0 8px 32px rgba(8,145,178,0.12)":"0 2px 12px rgba(0,0,0,0.04)",
       transition:"all .3s" }}>
       {/* Service photo/icon area */}
-      <div style={{ width:"100%", height:140, background:"linear-gradient(135deg,#e0f7fa,#cffafe)",
-        display:"flex", alignItems:"center", justifyContent:"center", fontSize:64,
-        position:"relative" }}>
-        {s.emoji}
+      <div style={{ width:"100%", height:220, overflow:"hidden",
+  position:"relative" }}>
+  {s.photo ? (
+    <img src={require(`./images/${s.photo}`)}
+      alt={s.title}
+      style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+  ) : (
+    <div style={{ width:"100%", height:"100%",
+      background:"linear-gradient(135deg,#e0f7fa,#cffafe)",
+      display:"flex", alignItems:"center", justifyContent:"center",
+      fontSize:64 }}>{s.emoji}</div>
+  )}
         <div style={{ position:"absolute", top:12, right:12,
           background:"#0891b2", borderRadius:8, padding:"3px 10px",
           fontSize:10, color:"white", fontWeight:700, letterSpacing:"0.05em" }}>
@@ -778,6 +789,7 @@ function OffersPage({ go }) {
   const offers = [
     {
       emoji:"🏠",
+      photo:"whitening-home.jpg",
       tag:"WHITENING",
       tagColor:"#0891b2",
       title:"Take-Home Teeth Whitening",
@@ -790,6 +802,7 @@ function OffersPage({ go }) {
     },
     {
       emoji:"✨",
+      photo:"whitening-chair.jpg",
       tag:"WHITENING",
       tagColor:"#0891b2",
       title:"In-Chair Teeth Whitening",
@@ -802,6 +815,7 @@ function OffersPage({ go }) {
     },
     {
       emoji:"⭐",
+      photo:"whitening-package.jpg",
       tag:"BEST VALUE",
       tagColor:"#059669",
       title:"Complete Whitening Package",
@@ -814,6 +828,7 @@ function OffersPage({ go }) {
     },
     {
       emoji:"👨‍👩‍👧",
+      photo:"family.jpg",
       tag:"FAMILY OFFER",
       tagColor:"#7c3aed",
       title:"Two Kids on Medicare + Parent Check-up",
@@ -826,6 +841,7 @@ function OffersPage({ go }) {
     },
     {
       emoji:"🏥",
+      photo:"checkup.jpg",
       tag:"HEALTH FUND",
       tagColor:"#059669",
       title:"Check-up & Clean with Private Health Insurance",
@@ -838,6 +854,7 @@ function OffersPage({ go }) {
     },
     {
       emoji:"🔩",
+       photo:"implants.jpg",
       tag:"IMPLANTS",
       tagColor:"#0a3550",
       title:"Dental Implant with Crown",
@@ -850,6 +867,7 @@ function OffersPage({ go }) {
     },
     {
       emoji:"💉",
+       photo:"botox.jpg",
       tag:"AESTHETICS",
       tagColor:"#c05577",
       title:"Cosmetic Injection Special Offers",
@@ -910,9 +928,19 @@ function OffersPage({ go }) {
               )}
               {/* Top section */}
               <div style={{ padding:"28px 24px 20px" }}>
-                <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16 }}>
-                  <div style={{ fontSize:36 }}>{o.emoji}</div>
-                  <div style={{ background:`${o.tagColor}18`,
+                {o.photo && (
+  <div style={{ width:"100%", height:200, overflow:"hidden",
+    borderRadius:"12px 12px 0 0", marginBottom:16, marginTop:-28,
+    marginLeft:-24, marginRight:-24, width:"calc(100% + 48px)" }}>
+    <img src={require(`./images/${o.photo}`)}
+      alt={o.title}
+      style={{ width:"100%", height:"100%",
+        objectFit:"cover", objectPosition:"center" }} />
+  </div>
+)}
+<div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16 }}>
+  {!o.photo && <div style={{ fontSize:36 }}>{o.emoji}</div>}
+  <div style={{ background:`${o.tagColor}18`,
                     color:o.tagColor, borderRadius:8,
                     padding:"3px 10px", fontSize:10, fontWeight:700,
                     letterSpacing:"0.08em" }}>
@@ -1003,6 +1031,7 @@ function ServicesPage({ go, targetService }) {
   const all = [
     {
       emoji:"🦷", tag:"GENERAL",
+       photo:"checkup.jpg",
       title:"General Dental Check-up & Clean",
       desc:"Comprehensive examination and professional cleaning to maintain optimal oral health.",
       meaning:"A routine check-up involves a thorough examination of your teeth, gums, and mouth to detect any problems early. The professional clean removes plaque and tartar that regular brushing cannot reach.",
@@ -1013,6 +1042,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🔩", tag:"IMPLANTS",
+       photo:"implants.jpg",
       title:"Dental Implants",
       desc:"Permanent titanium tooth replacement that looks, feels, and functions like a natural tooth.",
       meaning:"A dental implant is a titanium post surgically placed into the jawbone to act as an artificial tooth root. Once healed, a custom-made crown is attached — giving you a permanent, natural-looking replacement tooth.",
@@ -1023,6 +1053,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"✨", tag:"WHITENING",
+       photo:"whitening-chair.jpg",
       title:"Teeth Whitening — In-Chair",
       desc:"Professional in-clinic whitening for dramatically whiter teeth in a single appointment.",
       meaning:"In-chair whitening uses professional-strength bleaching gel activated under a special light to break down stains and discolouration. Results are immediate and significantly stronger than any over-the-counter product.",
@@ -1033,6 +1064,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🏠", tag:"WHITENING",
+       photo:"whitening-home.jpg",
       title:"Teeth Whitening — Take-Home Trays",
       desc:"Custom-fitted whitening trays for professional results from the comfort of your home.",
       meaning:"Take-home whitening uses custom-made trays fitted precisely to your teeth, combined with professional-strength whitening gel. You wear the trays for a set time each day, gradually whitening your teeth over 1 to 2 weeks.",
@@ -1043,6 +1075,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"💎", tag:"COSMETIC",
+       photo:"veneers.jpg",
       title:"Porcelain Veneers",
       desc:"Ultra-thin porcelain shells that transform the shape, colour, and size of your teeth.",
       meaning:"Veneers are custom-made, wafer-thin shells of porcelain bonded to the front surface of your teeth. They are used to fix chips, gaps, staining, and misshapen teeth — creating a perfect, natural-looking smile.",
@@ -1053,6 +1086,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🦠", tag:"GENERAL",
+       photo:"rootcanal.jpg",
       title:"Root Canal Treatment",
       desc:"Pain-free treatment to save an infected tooth and relieve acute toothache.",
       meaning:"Root canal therapy removes infected or dead pulp (the nerve and blood supply) from inside a tooth. The canal is cleaned, disinfected, and sealed — saving the tooth from extraction and eliminating pain.",
@@ -1063,6 +1097,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"👑", tag:"GENERAL",
+       photo:"dental crown procedure.jpg",
       title:"Dental Crowns",
       desc:"Custom caps that restore the shape, strength, and appearance of damaged teeth.",
       meaning:"A dental crown is a custom-made cap that covers the entire visible portion of a damaged, broken, or heavily filled tooth. Crowns restore full function and appearance while protecting the tooth from further damage.",
@@ -1073,6 +1108,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🌉", tag:"GENERAL",
+       photo:"dental bridge teeth.jpg",
       title:"Dental Bridges",
       desc:"A fixed restoration that replaces one or more missing teeth using neighbouring teeth as support.",
       meaning:"A dental bridge fills the gap left by one or more missing teeth. It consists of artificial teeth (pontics) anchored to crowns on the adjacent natural teeth — creating a fixed, non-removable replacement.",
@@ -1083,6 +1119,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🎨", tag:"GENERAL",
+       photo:"composite filling dentist.jpg",
       title:"Tooth Coloured Fillings",
       desc:"Natural-looking composite resin fillings that blend seamlessly with your teeth.",
       meaning:"Tooth-coloured fillings use composite resin material matched to your natural tooth colour to repair cavities and decay. They bond directly to the tooth structure, requiring less removal of healthy tooth than old silver amalgam fillings.",
@@ -1093,6 +1130,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🚨", tag:"EMERGENCY",
+       photo:"emergency.jpg",
       title:"Emergency Dental Care",
       desc:"Same-day urgent appointments for toothache, trauma, broken teeth, and lost fillings.",
       meaning:"Dental emergencies include sudden toothache, chipped or broken teeth, knocked-out teeth, lost fillings or crowns, facial swelling, and dental abscesses. Prompt treatment relieves pain and prevents further complications.",
@@ -1103,6 +1141,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"👶", tag:"FAMILY",
+       photo:"children.jpg",
       title:"Children's Dentistry",
       desc:"Gentle, fun, and stress-free dental care for children of all ages.",
       meaning:"Children's dentistry focuses on preventive care, early detection of problems, and creating positive dental experiences for young patients. Starting dental visits early builds lifelong healthy habits.",
@@ -1113,6 +1152,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"💉", tag:"AESTHETICS",
+       photo:"botox.jpg",
       title:"Anti-Wrinkle Injections",
       desc:"Smooth dynamic wrinkles and refresh your appearance with TGA-approved anti-wrinkle treatments.",
       meaning:"Anti-wrinkle injections (commonly known as Botox) use a purified protein to temporarily relax facial muscles that cause frown lines, forehead lines, and crow's feet. Results are natural-looking and non-surgical.",
@@ -1123,6 +1163,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"😬", tag:"GENERAL",
+       photo:"grinding.jpg",
       title:"Teeth Grinding Treatment",
       desc:"Protect your teeth and relieve jaw pain caused by grinding and clenching (bruxism).",
       meaning:"Bruxism is the unconscious grinding or clenching of teeth, usually during sleep. Over time it causes worn teeth, jaw pain, headaches, and cracked teeth. Treatment involves custom splints and in some cases anti-wrinkle injections to relax the jaw muscles.",
@@ -1133,6 +1174,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"💆", tag:"AESTHETICS",
+       photo:"face fillers.jpg",
       title:"Face Enhancement with Dermal Filler",
       desc:"Restore volume, define features, and rejuvenate your appearance with dermal fillers.",
       meaning:"Dermal fillers use hyaluronic acid — a naturally occurring substance — to add volume, smooth lines, and enhance facial features. Common areas include cheeks, jawline, under-eyes, and nasolabial folds.",
@@ -1143,6 +1185,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"👄", tag:"AESTHETICS",
+       photo:"fillers.jpg",
       title:"Lip Enhancement",
       desc:"Achieve fuller, more defined lips with natural-looking hyaluronic acid filler.",
       meaning:"Lip filler uses hyaluronic acid to add volume, define the border, and improve the shape of the lips. Treatment can be subtle (natural enhancement) or more dramatic depending on your goals.",
@@ -1153,6 +1196,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"😊", tag:"COSMETIC",
+       photo:"Cosmetic Dentistry.jpg",
       title:"Cosmetic Dentistry",
       desc:"Smile makeovers combining multiple treatments to transform your smile completely.",
       meaning:"Cosmetic dentistry combines treatments such as whitening, veneers, bonding, and gum contouring to create a complete smile transformation tailored to your unique facial features and goals.",
@@ -1163,6 +1207,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"👨‍👩‍👧", tag:"FAMILY",
+       photo:"family.jpg",
       title:"Family Dentistry",
       desc:"Comprehensive dental care for every member of your family, from toddlers to seniors.",
       meaning:"Family dentistry means we treat all ages in the one practice — children, adults, and elderly patients. We build long-term relationships with families and provide continuity of care across generations.",
@@ -1173,6 +1218,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🦴", tag:"GENERAL",
+       photo:"dentures.jpg",
       title:"Dentures",
       desc:"Custom-made removable tooth replacements to restore your smile and chewing function.",
       meaning:"Dentures are removable prosthetic devices that replace missing teeth. They can be full (replacing all teeth) or partial (replacing some teeth). Modern dentures are natural-looking and comfortable.",
@@ -1183,6 +1229,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🦷", tag:"ORAL SURGERY",
+       photo:"wisdom.jpg",
       title:"Wisdom Teeth Removal",
       desc:"Safe removal of problematic wisdom teeth to prevent pain, infection, and crowding.",
       meaning:"Wisdom teeth (third molars) often cause problems when there is not enough room for them to erupt properly. Impacted or partially erupted wisdom teeth can cause pain, infection, and damage to adjacent teeth.",
@@ -1193,6 +1240,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🔧", tag:"GENERAL",
+       photo:"extraction.jpg",
       title:"Teeth Extraction",
       desc:"Gentle, pain-free removal of teeth that cannot be saved.",
       meaning:"Sometimes a tooth is too damaged by decay, fracture, or infection to be saved. Extraction removes the tooth to relieve pain and prevent further problems. We always explore saving the tooth first before recommending extraction.",
@@ -1203,6 +1251,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🛡️", tag:"PREVENTIVE",
+       photo:"preventive.jpg",
       title:"Preventive Dental Treatments",
       desc:"Proactive treatments to protect your teeth and prevent problems before they start.",
       meaning:"Preventive dentistry includes fluoride treatments, fissure sealants, dietary advice, and oral hygiene instructions designed to keep your teeth healthy and avoid costly treatments down the track.",
@@ -1213,6 +1262,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🏃", tag:"SPORTS",
+       photo:"mouthguard.jpg",
       title:"Mouth Guards for Sports",
       desc:"Custom-fitted sports mouth guards to protect your teeth during contact sports.",
       meaning:"A custom-fitted mouthguard from your dentist provides significantly better protection than over-the-counter guards. They are essential for contact sports like football, basketball, martial arts, and boxing.",
@@ -1223,6 +1273,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"😴", tag:"GENERAL",
+       photo:"grinding.jpg",
       title:"Splints for Grinding",
       desc:"Custom occlusal splints to protect your teeth from grinding and clenching during sleep.",
       meaning:"An occlusal splint (night guard) is a custom-made hard acrylic device worn over your teeth during sleep. It prevents grinding damage, relieves jaw muscle tension, and protects existing dental work.",
@@ -1233,6 +1284,7 @@ function ServicesPage({ go, targetService }) {
     },
     {
       emoji:"🌟", tag:"COSMETIC",
+       photo:"smile-design.jpg",
       title:"Smile Design",
       desc:"A fully personalised smile makeover planned around your face, features, and goals.",
       meaning:"Smile design is a comprehensive process where we analyse your teeth, gums, lips, and facial proportions to create a bespoke treatment plan. Using digital technology, you can preview your new smile before any treatment begins.",
@@ -1380,9 +1432,9 @@ function ContactPage() {
             <h2 className="serif" style={{ fontSize:30, color:"#0a3550", fontWeight:600, marginBottom:26 }}>Clinic Information</h2>
             {[
               { icon:<MapPin size={19}/>, label:"Address", val:"362 Edgars Rd\nLalor VIC 3075" },
-              { icon:<Phone size={19}/>, label:"Phone", val:"0382567501" },
+              { icon:<Phone size={19}/>, label:"Phone", val:"0382567501", href:"tel:0382567501"},
               { icon:<Mail size={19}/>, label:"Email", val:"info@lalordental.com.au" },
-            ].map(({ icon, label, val }) => (
+            ].map(({ icon, label, val, href }) => (
               <div key={label} style={{ display:"flex", gap:14, marginBottom:16,
                 background:"white", padding:"16px 20px", borderRadius:14,
                 border:"1px solid rgba(14,116,144,.07)" }}>
@@ -1392,8 +1444,13 @@ function ContactPage() {
                 <div>
                   <div style={{ fontSize:11, color:"#94a3b8", fontWeight:600,
                     textTransform:"uppercase", letterSpacing:"0.07em", marginBottom:3 }}>{label}</div>
-                  <div style={{ fontSize:14, color:"#1e293b", fontWeight:500, whiteSpace:"pre-line" }}>{val}</div>
-                </div>
+                  {href ? (
+                    <a href={href} style={{ fontSize:14, color:"#0891b2", fontWeight:500,
+                      textDecoration:"none" }}>{val}</a>
+                  ) : (
+                    <div style={{ fontSize:14, color:"#1e293b", fontWeight:500,
+                      whiteSpace:"pre-line" }}>{val}</div>
+                  )}                </div>
               </div>
             ))}
             {/* Hours */}
@@ -1874,13 +1931,18 @@ function Footer({ go }) {
           <div>
             <div style={{ color:"white", fontWeight:600, fontSize:13,
               marginBottom:16, letterSpacing:"0.06em", textTransform:"uppercase" }}>Contact</div>
-            {[[<MapPin size={12}/>, "362 Edgars Rd\nLalor VIC 3075"],
-              [<Phone size={12}/>, "0382567501"],
-              [<Mail size={12}/>, "info@lalordental.com.au"]].map(([icon,text],i) => (
+            {[[<MapPin size={12}/>, "362 Edgars Road\nLalor VIC 3075", null],
+              [<Phone size={12}/>, "0382567501", "tel:0382567501"],
+              [<Mail size={12}/>, "info@lalordentalclinic.com.au", "mailto:info@lalordentalclinic.com.au"]].map(([icon,text,href],i) => (
               <div key={i} style={{ display:"flex", gap:9, marginBottom:11,
                 fontSize:12, alignItems:"flex-start" }}>
                 <span style={{ color:"#0891b2", marginTop:1, flexShrink:0 }}>{icon}</span>
-                <span style={{ whiteSpace:"pre-line", lineHeight:1.65 }}>{text}</span>
+                {href ? (
+                  <a href={href} style={{ whiteSpace:"pre-line", lineHeight:1.65,
+                    color:"rgba(255,255,255,.6)", textDecoration:"none" }}>{text}</a>
+                ) : (
+                  <span style={{ whiteSpace:"pre-line", lineHeight:1.65 }}>{text}</span>
+                )}
               </div>
             ))}
           </div>
