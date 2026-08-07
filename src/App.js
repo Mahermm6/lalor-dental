@@ -348,9 +348,9 @@ function HomePage({ go }) {
           border:"1px solid rgba(8,145,178,.14)", opacity:.7 }} />
         <div style={{ position:"absolute", top:"18%", right:"8%", width:280, height:280, borderRadius:"50%",
           border:"1px solid rgba(8,145,178,.1)" }} />
-        <div style={{ maxWidth:1200, margin:"0 auto", padding:"72px 24px",
-          display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center",
-          position:"relative", zIndex:1, width:"100%" }} className="two-col">
+        <div style={{ maxWidth:900, margin:"0 auto", padding:"72px 24px",
+        display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center",
+        position:"relative", zIndex:1, width:"100%" }}>
           {/* Text */}
           <div>
             <div style={{ display:"inline-flex", alignItems:"center", gap:8,
@@ -371,7 +371,7 @@ function HomePage({ go }) {
               marginBottom:36, maxWidth:440 }}>
               Healthy Smile, Confident You. Dr. Eyad Almashaal brings over 10 years of experience delivering complete dental and aesthetic care for the whole family.
             </p>
-            <div style={{ display:"flex", gap:14, flexWrap:"wrap" }}>
+            <div style={{ display:"flex", gap:14, flexWrap:"wrap", justifyContent:"center" }}>
               <button className="btn-p" onClick={() => go("book")}
                 style={{ padding:"14px 28px", borderRadius:10, fontSize:15, fontWeight:600,
                   display:"flex", alignItems:"center", gap:8 }}>
@@ -396,42 +396,8 @@ function HomePage({ go }) {
             </div>
             */}
           </div>
-          {/* Doctor card */}
-          <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
-            <div style={{ position:"relative", width:360, height:360 }}>
-              <div style={{ position:"absolute", inset:-18, borderRadius:"50%",
-                border:"2px dashed rgba(8,145,178,.25)" }} />
-              
-              <div style={{ width:"100%", height:"100%", borderRadius:"50%",
-                background:"linear-gradient(135deg,#0d6480,#1a9cb5)",
-                display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
-                border:"4px solid rgba(214, 228, 231, 0.35)",
-                boxShadow:"0 28px 70px rgba(0,0,0,.3)" }}>
-                <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"  style={{ width:"66%", height:"80%", objectFit:"cover" }} />
-                <div className="serif" style={{ color:"white", fontSize:17, fontWeight:600 }}>Dr. Eyad Almashaal</div>
-                <div style={{ color:"rgba(255,255,255,.6)", fontSize:13, marginTop:5 }}>Principal Dentist · BDS</div>
-              </div>
-              {/* Review badge 
-              <div style={{ position:"absolute", bottom:24, right:-24,
-                background:"white", borderRadius:14, padding:"12px 16px",
-                boxShadow:"0 10px 30px rgba(0,0,0,.22)",
-                display:"flex", alignItems:"center", gap:9 }}>
-                <div style={{ color:"#f59e0b", fontSize:15 }}>★★★★★</div>
-                <div>
-                  <div style={{ fontSize:12, fontWeight:700, color:"#0a3550" }}>5.0 Rating</div>
-                  <div style={{ fontSize:10, color:"#94a3b8" }}>Google Reviews</div>
-                </div>
-              </div>
-              */}
-              {/* Emergency badge 
-              <div style={{ position:"absolute", top:24, left:-16,
-                background:"#0891b2", borderRadius:12, padding:"10px 14px",
-                boxShadow:"0 8px 22px rgba(8,145,178,.4)", textAlign:"center" }}>
-                <div className="serif" style={{ color:"white", fontSize:13, fontWeight:700 }}>Same Day</div>
-                <div style={{ fontSize:10, color:"rgba(255,255,255,.8)" }}>Emergency Care</div>
-              </div>*/}
-            </div>
-          </div>
+         {/* Doctor card — plain blue block */}
+        
         </div>
         {/* Scroll cue */}
         <div style={{ position:"absolute", bottom:28, left:"50%", transform:"translateX(-50%)",
@@ -793,8 +759,8 @@ function OffersPage({ go }) {
       tag:"WHITENING",
       tagColor:"#0891b2",
       title:"Take-Home Teeth Whitening",
-      price:"$200",
-      original:null,
+      price:"$250",
+      original:"$450",
       highlight:false,
       desc:"Professional custom-fitted whitening trays with professional-strength gel for stunning results from home.",
       includes:["Custom-fitted whitening trays","Professional whitening gel syringes","Full instructions","Results in 1–2 weeks"],
@@ -806,8 +772,8 @@ function OffersPage({ go }) {
       tag:"WHITENING",
       tagColor:"#0891b2",
       title:"In-Chair Teeth Whitening",
-      price:"$400",
-      original:null,
+      price:"$450",
+      original:"$750",
       highlight:false,
       desc:"Professional in-clinic whitening for immediately whiter teeth in a single 90-minute appointment.",
       includes:["In-chair professional whitening","Up to 8 shades lighter","Immediate results","Single appointment"],
@@ -819,8 +785,8 @@ function OffersPage({ go }) {
       tag:"BEST VALUE",
       tagColor:"#059669",
       title:"Complete Whitening Package",
-      price:"$500",
-      original:"$600",
+      price:"$600",
+      original:"$995",
       highlight:true,
       desc:"The ultimate whitening package — in-chair whitening PLUS take-home trays for maximum results and long-lasting brightness.",
       includes:["In-chair whitening session","Custom take-home trays","Professional whitening gel","Best possible results","Maintain your results at home"],
@@ -853,13 +819,32 @@ function OffersPage({ go }) {
       note:"Out-of-pocket costs vary by health fund and policy level. Call us to check your cover before booking."
     },
     {
+      emoji:"🦷",
+      photo:"Checkup2.jpg",
+      tag:"SPECIAL OFFER",
+      tagColor:"#0891b2",
+      title:"Check-up & Clean with X-Rays",
+      price:"$165",
+      original:"$320",
+      highlight:false,
+      desc:"Comprehensive dental check-up, professional clean, and X-rays — everything you need to know about your oral health at a special discounted price.",
+      includes:[
+        "Full mouth examination",
+        "Professional scale and clean",
+        "Digital X-rays",
+        "Oral cancer screening",
+        "Personalised oral health advice"
+      ],
+      note:"Valid for new patients and existing patients without a recent check-up."
+    },
+    {
       emoji:"🔩",
-       photo:"implants.jpg",
+      photo:"implants.jpg",
       tag:"IMPLANTS",
       tagColor:"#0a3550",
       title:"Dental Implant with Crown",
-      price:"$3,500",
-      original:null,
+      price:"$3,800",
+      original:"$5,000",
       highlight:true,
       desc:"Complete single tooth replacement including the titanium implant, abutment, and custom porcelain crown. A permanent solution for a missing tooth.",
       includes:["Initial consultation and X-rays","Titanium implant placement","Healing period monitoring","Custom porcelain crown","Complete permanent tooth replacement"],
