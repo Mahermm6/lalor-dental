@@ -348,9 +348,9 @@ function HomePage({ go }) {
           border:"1px solid rgba(8,145,178,.14)", opacity:.7 }} />
         <div style={{ position:"absolute", top:"18%", right:"8%", width:280, height:280, borderRadius:"50%",
           border:"1px solid rgba(8,145,178,.1)" }} />
-        <div style={{ maxWidth:900, margin:"0 auto", padding:"72px 24px",
-        display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center",
-        position:"relative", zIndex:1, width:"100%" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", padding:"72px 24px",
+  display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center",
+  position:"relative", zIndex:1, width:"100%" }} className="two-col">
           {/* Text */}
           <div>
             <div style={{ display:"inline-flex", alignItems:"center", gap:8,
@@ -371,7 +371,7 @@ function HomePage({ go }) {
               marginBottom:36, maxWidth:440 }}>
               Healthy Smile, Confident You. Dr. Eyad Almashaal brings over 10 years of experience delivering complete dental and aesthetic care for the whole family.
             </p>
-            <div style={{ display:"flex", gap:14, flexWrap:"wrap", justifyContent:"center" }}>
+            <div style={{ display:"flex", gap:14, flexWrap:"wrap" }}>
               <button className="btn-p" onClick={() => go("book")}
                 style={{ padding:"14px 28px", borderRadius:10, fontSize:15, fontWeight:600,
                   display:"flex", alignItems:"center", gap:8 }}>
@@ -396,7 +396,45 @@ function HomePage({ go }) {
             </div>
             */}
           </div>
-         {/* Doctor card — plain blue block */}
+                   {/* Doctor card */}
+          <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
+            <div style={{ position:"relative", width:500, height:500 }}>
+              {/* Dashed ring */}
+              <div style={{ position:"absolute", inset:-18, borderRadius:"50%",
+                border:"2px dashed rgba(8,145,178,.25)" }} />
+              {/* Photo circle */}
+              <div style={{ width:"100%", height:"100%", borderRadius:"50%",
+                overflow:"hidden",
+                background:"#e0f7fa",
+                border:"4px solid rgba(8,145,178,.35)",
+                boxShadow:"0 28px 70px rgba(0,0,0,.3)" }}>
+                <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
+                  style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+              </div>
+              {/* 10+ years badge */}
+              <div style={{ position:"absolute", bottom:16, right:-20,
+                background:"linear-gradient(135deg,#0891b2,#22d3ee)",
+                borderRadius:14, padding:"12px 16px",
+                boxShadow:"0 8px 22px rgba(8,145,178,.45)",
+                textAlign:"center" }}>
+                <div className="serif" style={{ color:"white", fontSize:22,
+                  fontWeight:800, lineHeight:1 }}>10+</div>
+                <div style={{ fontSize:10, color:"rgba(255,255,255,.85)",
+                  marginTop:3, fontWeight:600 }}>Years Experience</div>
+              </div>
+              {/* Name badge */}
+              <div style={{ position:"absolute", top:10, left:-20,
+                background:"white", borderRadius:12, padding:"10px 14px",
+                boxShadow:"0 8px 22px rgba(0,0,0,.15)" }}>
+                <div style={{ fontSize:12, fontWeight:700, color:"#0a3550" }}>
+                  Dr. Eyad Almashaal
+                </div>
+                <div style={{ fontSize:10, color:"#0891b2", marginTop:2 }}>
+                  Principal Dentist · BDS
+                </div>
+              </div>
+            </div>
+          </div>
         
         </div>
         {/* Scroll cue */}
@@ -797,13 +835,19 @@ function OffersPage({ go }) {
       photo:"family.jpg",
       tag:"FAMILY OFFER",
       tagColor:"#7c3aed",
-      title:"Two Kids on Medicare + Parent Check-up",
-      price:"$159",
-      original:null,
-      highlight:false,
-      desc:"Bring two children covered by Medicare Child Dental Benefit Schedule and receive a parent check-up, clean, and X-rays (if needed) for only $159.",
-      includes:["Two children's appointments under Medicare CDBS","Parent check-up and professional clean","X-rays if clinically needed","Personalised oral health advice"],
-      note:"Children must be eligible for Medicare Child Dental Benefit Schedule."
+      title:"2 Kids Medicare Check-up + 1 Parent Check-up FREE",
+      price:"FREE",
+      original:"$320",
+      highlight:true,
+      desc:"Bring your two children for their Medicare-covered check-up and clean — and we will give ONE parent a full check-up and clean completely FREE of charge.",
+      includes:[
+        "✅ Child 1 — Full check-up & clean (Medicare CDBS)",
+        "✅ Child 2 — Full check-up & clean (Medicare CDBS)",
+        "🎁 Parent — Full check-up & clean COMPLIMENTARY",
+        "X-rays included if clinically needed",
+        "Personalised oral health advice for the whole family"
+      ],
+      note:"Children must be eligible for Medicare Child Dental Benefit Schedule. One complimentary parent visit per family. Call us to confirm your children's eligibility before booking."
     },
     {
       emoji:"🏥",
@@ -891,26 +935,84 @@ function OffersPage({ go }) {
       </section>
 
       {/* Offers grid */}
-      <section style={{ padding:"72px 24px", background:"#f8fafc" }}>
+
+      <section style={{ padding:"72px 24px 72px", background:"#f8fafc" }}>
+  <div style={{ paddingTop:24 }}>
+
+      {/* Attention banner */}
+<div style={{ maxWidth:1100, margin:"0 auto 36px",
+  background:"linear-gradient(135deg,#0a3550,#0891b2)",
+  borderRadius:18, padding:"24px 32px",
+  display:"flex", alignItems:"center", justifyContent:"space-between",
+  flexWrap:"wrap", gap:16, boxShadow:"0 8px 32px rgba(8,145,178,.25)" }}>
+  <div>
+    <div style={{ fontSize:11, color:"#67e8f9", fontWeight:700,
+      letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:6 }}>
+      🔥 Limited Time Only
+    </div>
+    <div className="serif" style={{ fontSize:26, color:"white",
+    fontWeight:700, lineHeight:1.2 }}>
+    {offers.length} Exclusive Offers for New & Existing Patients
+  </div>
+  </div>
+  <button className="btn-p" onClick={() => go("book")}
+    style={{ padding:"13px 26px", borderRadius:10, fontSize:14,
+      fontWeight:700, border:"2px solid rgba(255,255,255,.4)",
+      background:"rgba(255,255,255,.15)", cursor:"pointer",
+      color:"white", whiteSpace:"nowrap" }}>
+    📅 Book Now & Save
+  </button>
+</div>
+
+<div style={{ maxWidth:1100, margin:"0 auto",
+  display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))", gap:24 }}></div>
         <div style={{ maxWidth:1100, margin:"0 auto",
           display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))", gap:24 }}>
+
           {offers.map((o,i) => (
             <div key={i} style={{ background:"white", borderRadius:20,
-              overflow:"hidden",
+              overflow:"visible",
               border: o.highlight ? "2px solid #0891b2" : "1px solid rgba(14,116,144,.07)",
               boxShadow: o.highlight
                 ? "0 12px 40px rgba(8,145,178,0.18)"
                 : "0 4px 16px rgba(0,0,0,0.05)",
               position:"relative" }}>
-              {/* Best value ribbon */}
-              {o.highlight && (
-                <div style={{ position:"absolute", top:16, right:16, zIndex:2,
-                  background:"#0891b2", color:"white", borderRadius:8,
-                  padding:"4px 12px", fontSize:10, fontWeight:800,
-                  letterSpacing:"0.08em" }}>
-                  ⭐ POPULAR
+                {/* Offer number ribbon — sits above the card */}
+                <div style={{
+                  position:"absolute",
+                  top:-16,
+                  left:"50%",
+                  transform:"translateX(-50%)",
+                  zIndex:10,
+                  background:"#0a3550",
+                  color:"white",
+                  padding:"6px 22px",
+                  borderRadius:20,
+                  fontSize:11,
+                  fontWeight:800,
+                  letterSpacing:"0.14em",
+                  textTransform:"uppercase",
+                  boxShadow:"0 4px 14px rgba(10,53,80,.3)",
+                  whiteSpace:"nowrap",
+                  display:"flex",
+                  alignItems:"center",
+                  gap:6
+                }}>
+                  <span style={{ color:"#22d3ee" }}>✦</span>
+                  OFFER {i+1}
+                  <span style={{ color:"#22d3ee" }}>✦</span>
                 </div>
-              )}
+            {/* Best deal badge */}
+            {o.highlight && (
+              <div style={{ position:"absolute", top:16, right:16, zIndex:2,
+                background:"linear-gradient(135deg,#0891b2,#22d3ee)",
+                color:"white", borderRadius:10,
+                padding:"6px 14px", fontSize:11, fontWeight:800,
+                letterSpacing:"0.06em", boxShadow:"0 4px 12px rgba(8,145,178,.4)" }}>
+                ⭐ BEST DEAL
+              </div>
+            )}
+              
               {/* Top section */}
               <div style={{ padding:"28px 24px 20px" }}>
                 {o.photo && (
@@ -932,18 +1034,25 @@ function OffersPage({ go }) {
                     {o.tag}
                   </div>
                 </div>
-                <h3 className="serif" style={{ fontSize:20, color:"#0a3550",
-                  fontWeight:600, marginBottom:8, lineHeight:1.2 }}>{o.title}</h3>
+                <h3 className="serif" style={{ fontSize:22, color:"#0a3550",
+                   fontWeight:700, marginBottom:8, lineHeight:1.2 }}>{o.title}</h3>
                 <p style={{ fontSize:13, color:"#64748b",
                   lineHeight:1.65, marginBottom:16 }}>{o.desc}</p>
                 {/* Price */}
                 <div style={{ display:"flex", alignItems:"baseline",
-                  gap:8, marginBottom:16 }}>
-                  <div className="serif" style={{ fontSize:34, fontWeight:700,
-                    color:"#0a3550" }}>{o.price}</div>
+                  gap:10, marginBottom:16, flexWrap:"wrap" }}>
+                  <div className="serif" style={{ fontSize:42, fontWeight:800,
+                    background:"linear-gradient(135deg,#0891b2,#22d3ee)",
+                    WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent",
+                    lineHeight:1 }}>{o.price}</div>
                   {o.original && (
-                    <div style={{ fontSize:18, color:"#94a3b8",
-                      textDecoration:"line-through" }}>{o.original}</div>
+                    <div style={{ display:"flex", flexDirection:"column" }}>
+                      <div style={{ fontSize:13, color:"#94a3b8",
+                        textDecoration:"line-through" }}>{o.original}</div>
+                      <div style={{ fontSize:11, color:"#059669", fontWeight:700 }}>
+                        YOU SAVE {o.original}
+                      </div>
+                    </div>
                   )}
                 </div>
                 {/* Includes */}
@@ -987,7 +1096,7 @@ function OffersPage({ go }) {
             </div>
           ))}
         </div>
-
+        </div>
         {/* Bottom note */}
         <div style={{ maxWidth:600, margin:"40px auto 0", textAlign:"center",
           background:"white", borderRadius:16, padding:"22px",
