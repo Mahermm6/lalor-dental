@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.42343fd1.js",
+    "main.js": "/static/js/main.e855a120.js",
     "static/js/453.0977ed07.chunk.js": "/static/js/453.0977ed07.chunk.js",
     "static/media/dental bridge teeth1.jpg": "/static/media/dental bridge teeth1.1406a9cb35eef75f6673.jpg",
     "static/media/Cosmetic Dentistry.jpg": "/static/media/Cosmetic Dentistry.a8a14375b2eaed90da18.jpg",
@@ -35,11 +35,11 @@
     "static/media/veneers.jpg": "/static/media/veneers.c62d80411901cd85055d.jpg",
     "index.html": "/index.html",
     "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.42343fd1.js.map": "/static/js/main.42343fd1.js.map",
+    "main.e855a120.js.map": "/static/js/main.e855a120.js.map",
     "453.0977ed07.chunk.js.map": "/static/js/453.0977ed07.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.42343fd1.js"
+    "static/js/main.e855a120.js"
   ]
 }
