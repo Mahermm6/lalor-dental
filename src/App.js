@@ -47,6 +47,8 @@ useEffect(() => {
         .four-col { grid-template-columns: 1fr 1fr !important; }
         .hide-mobile { display: none !important; }
         #hamburger { display: block !important; }
+        * { max-width: 100vw; }
+         section { overflow-x: hidden !important; }
       }
     `}</style>
   );
@@ -396,11 +398,11 @@ function HomePage({ go }) {
             </div>
             */}
           </div>
-                   {/* Doctor card */}
+          {/* Doctor card */}
           <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
-            <div style={{ position:"relative", width:500, height:500 }}>
+            <div style={{ position:"relative", width:440, height:440 }}>
               {/* Dashed ring */}
-              <div style={{ position:"absolute", inset:-18, borderRadius:"50%",
+              <div style={{ position:"absolute", inset:-22, borderRadius:"50%",
                 border:"2px dashed rgba(8,145,178,.25)" }} />
               {/* Photo circle */}
               <div style={{ width:"100%", height:"100%", borderRadius:"50%",
@@ -409,10 +411,11 @@ function HomePage({ go }) {
                 border:"4px solid rgba(8,145,178,.35)",
                 boxShadow:"0 28px 70px rgba(0,0,0,.3)" }}>
                 <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
-                  style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                  style={{ width:"100%", height:"100%", objectFit:"cover",
+                    objectPosition:"center top" }} />
               </div>
-              {/* 10+ years badge */}
-              <div style={{ position:"absolute", bottom:16, right:-20,
+              {/* 10+ years badge — top right of circle */}
+              <div style={{ position:"absolute", top:20, right:-10,
                 background:"linear-gradient(135deg,#0891b2,#22d3ee)",
                 borderRadius:14, padding:"12px 16px",
                 boxShadow:"0 8px 22px rgba(8,145,178,.45)",
@@ -422,8 +425,8 @@ function HomePage({ go }) {
                 <div style={{ fontSize:10, color:"rgba(255,255,255,.85)",
                   marginTop:3, fontWeight:600 }}>Years Experience</div>
               </div>
-              {/* Name badge */}
-              <div style={{ position:"absolute", top:10, left:-20,
+              {/* Name badge — bottom left */}
+              <div style={{ position:"absolute", bottom:20, left:-10,
                 background:"white", borderRadius:12, padding:"10px 14px",
                 boxShadow:"0 8px 22px rgba(0,0,0,.15)" }}>
                 <div style={{ fontSize:12, fontWeight:700, color:"#0a3550" }}>
@@ -491,12 +494,12 @@ function HomePage({ go }) {
       <section style={{ padding:"96px 24px", background:"white" }}>
         <div style={{ maxWidth:1100, margin:"0 auto", display:"grid",
           gridTemplateColumns:"1fr 1.4fr", gap:68, alignItems:"center" }} className="two-col">
-          <div style={{ position:"relative" }}>
+          <div style={{ position:"relative", maxWidth:420, width:"100%", margin:"0 auto" }}>
             <div style={{ width:"100%", height:440, borderRadius:24,
               overflow:"hidden",
               boxShadow:"0 28px 64px rgba(10,53,80,.22)" }}>
               <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
-                style={{ width:"10", height:"110%", objectFit:"cover" }} />
+                style={{ width:"10", height:"110%", objectFit:"cover", }} />
             </div>
             <div style={{ position:"absolute", top:-18, right:-18,
               background:"linear-gradient(135deg,#0891b2,#06b6d4)",
@@ -1441,13 +1444,16 @@ function AboutPage({ go }) {
 
       <section style={{ padding:"80px 24px", background:"white" }}>
         <div style={{ maxWidth:1080, margin:"0 auto",
-          display:"grid", gridTemplateColumns:"1fr 1.5fr", gap:72, alignItems:"start" }} className="two-col">
+          display:"grid", gridTemplateColumns:"1fr 1.5fr", gap:40,
+          alignItems:"start", width:"100%" }} className="two-col">
           <div>
-            <div style={{ width:"100%", aspectRatio:"4/5", borderRadius:24,
+            <div style={{ width:"100%", maxWidth:380, margin:"0 auto",
+              aspectRatio:"3/4", borderRadius:24,
               overflow:"hidden",
               boxShadow:"0 28px 64px rgba(10,53,80,.2)" }}>
               <img src={require('./doctor.png')} alt="Dr. Eyad Almashaal"
-                style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                style={{ width:"100%", height:"100%", objectFit:"cover",
+                  objectPosition:"center top" }} />
             </div>
             <div style={{ background:"#f8fafc", borderRadius:16, padding:"22px",
               marginTop:18, border:"1px solid rgba(14,116,144,.08)" }}>
