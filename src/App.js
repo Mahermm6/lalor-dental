@@ -400,7 +400,7 @@ function HomePage({ go }) {
           </div>
           {/* Doctor card */}
           <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
-            <div style={{ position:"relative", width:440, height:440 }}>
+            <div style={{ position:"relative", width:400, height:400 }}>
               {/* Dashed ring */}
               <div style={{ position:"absolute", inset:-22, borderRadius:"50%",
                 border:"2px dashed rgba(8,145,178,.25)" }} />
@@ -1042,34 +1042,35 @@ function OffersPage({ go }) {
                 <p style={{ fontSize:13, color:"#64748b",
                   lineHeight:1.65, marginBottom:16 }}>{o.desc}</p>
                 {/* Price */}
-                <div style={{ display:"flex", alignItems:"baseline",
-                  gap:10, marginBottom:16, flexWrap:"wrap" }}>
-                  <div className="serif" style={{ fontSize:42, fontWeight:800,
-                    background:"linear-gradient(135deg,#0891b2,#22d3ee)",
-                    WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent",
-                    lineHeight:1 }}>{o.price}</div>
-                  {o.original && (
-                    <div style={{ display:"flex", flexDirection:"column" }}>
-                      <div style={{ fontSize:13, color:"#94a3b8",
-                        textDecoration:"line-through" }}>{o.original}</div>
-                      <div style={{ fontSize:11, color:"#059669", fontWeight:700 }}>
-                        YOU SAVE {o.original}
-                      </div>
+                <div style={{ display:"flex", flexDirection:"column", gap:6, marginBottom:16 }}>
+                  {/* Original price with strikethrough */}
+                  {o.original && o.price !== "FREE" && o.price !== "Contact Us" && (
+                    <div style={{ fontSize:16, color:"#94a3b8",
+                      textDecoration:"line-through", fontWeight:500 }}>
+                      Was {o.original}
                     </div>
                   )}
-                </div>
-                {/* Includes */}
-                <div style={{ display:"flex", flexDirection:"column", gap:6, marginBottom:16 }}>
-                  {o.includes.map((item,j) => (
-                    <div key={j} style={{ display:"flex", alignItems:"flex-start", gap:8 }}>
-                      <div style={{ width:16, height:16, borderRadius:"50%",
-                        background:"#e0f7fa", display:"flex", alignItems:"center",
-                        justifyContent:"center", flexShrink:0, marginTop:1 }}>
-                        <Check size={9} color="#0891b2" />
+                  {/* Offer price */}
+                  <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap" }}>
+                    <div className="serif" style={{ fontSize:42, fontWeight:800,
+                      background:"linear-gradient(135deg,#0891b2,#22d3ee)",
+                      WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent",
+                      lineHeight:1 }}>{o.price}</div>
+                    {/* Savings badge */}
+                    {o.original && o.price !== "FREE" && o.price !== "Contact Us" && (
+                      <div style={{ background:"#dcfce7", border:"1px solid #86efac",
+                        borderRadius:8, padding:"4px 10px",
+                        display:"flex", alignItems:"center", gap:4 }}>
+                        <span style={{ fontSize:13, color:"#059669", fontWeight:800 }}>
+                          💰 SAVE $
+                          {(
+                            parseInt(o.original.replace(/[$,]/g,"")) -
+                            parseInt(o.price.replace(/[$,]/g,""))
+                          ).toLocaleString()}
+                        </span>
                       </div>
-                      <span style={{ fontSize:13, color:"#374151" }}>{item}</span>
-                    </div>
-                  ))}
+                    )}
+                  </div>
                 </div>
                 {/* Note */}
                 {o.note && (
@@ -1100,17 +1101,37 @@ function OffersPage({ go }) {
           ))}
         </div>
         </div>
-        {/* Bottom note */}
-        <div style={{ maxWidth:600, margin:"40px auto 0", textAlign:"center",
-          background:"white", borderRadius:16, padding:"22px",
-          border:"1px solid rgba(14,116,144,.08)" }}>
-          <div style={{ fontSize:20, marginBottom:8 }}>💳</div>
-          <div style={{ fontWeight:600, color:"#0a3550", fontSize:15, marginBottom:6 }}>
-            Payment Plans Available
+      {/* Bottom note */}
+      
+
+        {/* MediPay section */}
+        <div style={{ maxWidth:600, margin:"24px auto 0", textAlign:"center",
+          background:"white", borderRadius:16, padding:"28px 24px",
+          border:"1px solid rgba(14,116,144,.08)",
+          boxShadow:"0 4px 16px rgba(0,0,0,.05)" }}>
+          {/* MediPay Logo */}
+          <div style={{ display:"flex", justifyContent:"center", marginBottom:16 }}>
+            <img src="https://smile.medipay.com.au/assets/medipay-logo.png"
+              alt="MediPay" style={{ height:40, objectFit:"contain" }}
+              onError={e => { e.target.style.display='none'; }} />
           </div>
-          <p style={{ fontSize:13, color:"#64748b", lineHeight:1.65 }}>
-            We understand dental care is an investment. Ask our team about flexible payment options available at the clinic. All major health funds accepted with HICAPS on-site.
+          <div style={{ fontWeight:700, color:"#0a3550", fontSize:16, marginBottom:8 }}>
+            Pay Later with MediPay
+          </div>
+          <p style={{ fontSize:13, color:"#64748b", lineHeight:1.65, marginBottom:20 }}>
+            Spread the cost of your dental treatment with MediPay's flexible
+            pay later options. No large upfront payments — get the care you
+            need today and pay at your own pace.
           </p>
+          <a href="https://smile.medipay.com.au/paylater/lalordentalclinic"
+            target="_blank" rel="noopener noreferrer"
+            style={{ display:"inline-flex", alignItems:"center", gap:8,
+              padding:"13px 28px", borderRadius:10, fontSize:14, fontWeight:700,
+              background:"linear-gradient(135deg,#0891b2,#22d3ee)",
+              color:"white", textDecoration:"none",
+              boxShadow:"0 6px 18px rgba(8,145,178,.35)" }}>
+            💳 Calculate Your Pay Later Options
+          </a>
         </div>
       </section>
     </div>
@@ -1712,32 +1733,28 @@ function BookPage() {
                 🔒 Secure
               </div>
             </div>
-            {/* === DENTAL4WEB WIDGET EMBEDS BELOW === */}
-            <div style={{ padding:"56px 40px", textAlign:"center" }}>
-              <div style={{ fontSize:50, marginBottom:14 }}>🗓️</div>
-              <h3 className="serif" style={{ fontSize:26, color:"#0a3550", fontWeight:600, marginBottom:12 }}>
-                Dental4Web Booking System
-              </h3>
-              <p style={{ fontSize:15, color:"#64748b", maxWidth:420, margin:"0 auto 24px", lineHeight:1.7 }}>
-                The Dental4Web online booking widget will be embedded here. Replace this block with your Dental4Web embed code.
-              </p>
-              {/* Code block */}
-              <div style={{ background:"#f1f5f9", borderRadius:12, padding:"16px 20px",
-                textAlign:"left", maxWidth:480, margin:"0 auto 28px",
-                fontFamily:"monospace", fontSize:12, color:"#475569", lineHeight:1.8 }}>
-                <span style={{ color:"#94a3b8" }}>{`<!-- Dental4Web Widget -->`}</span><br/>
-                <span style={{ color:"#0891b2" }}>{`<script`}</span>{` src="`}<span style={{ color:"#065f46" }}>{`https://dental4web.com.au/widget.js`}</span>{`"`}<br/>
-                {`  data-clinic="`}<span style={{ color:"#065f46" }}>lalor-dental</span>{`">`}<br/>
-                <span style={{ color:"#0891b2" }}>{`</script>`}</span>
+            {/* === DENTAL4WEB BOOKING WIDGET === */}
+            <div style={{ padding:"0" }}>
+              <iframe
+                src="https://www.centaurportal.com/d4w/org-3907/extended_search?sourceRef=android-app:%2F%2Fcom.google.android.gm%2F&location=4372&randomNumber=cb028e91adf69a5467ff048cd5d6d7c63cd7f89775859d94f824adc40e4d710f&shortVer=false&sourceID=null"
+                width="100%"
+                height="700"
+                frameBorder="0"
+                title="Book Appointment — Lalor Dental Clinic"
+                style={{ display:"block", minHeight:700, border:"none" }}
+              />
+              <div style={{ padding:"24px 32px", textAlign:"center",
+                borderTop:"1px solid #f1f5f9" }}>
+                <p style={{ fontSize:14, color:"#64748b", marginBottom:16 }}>
+                  Having trouble with the booking form? Call us directly:
+                </p>
+                <a href="tel:0382567501" className="btn-p"
+                  style={{ padding:"13px 26px", borderRadius:10, fontSize:15,
+                    fontWeight:600, display:"inline-flex", alignItems:"center",
+                    gap:8, textDecoration:"none" }}>
+                  <Phone size={17} /> 0382567501
+                </a>
               </div>
-              <p style={{ fontSize:13, color:"#94a3b8", marginBottom:22 }}>
-                Or call us directly to book:
-              </p>
-              <button className="btn-p"
-                style={{ padding:"14px 28px", borderRadius:10, fontSize:15, fontWeight:600,
-                  display:"inline-flex", alignItems:"center", gap:8 }}>
-                <Phone size={17} /> (03) 8256 7501
-              </button>
             </div>
           </div>
         </div>
