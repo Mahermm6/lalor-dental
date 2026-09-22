@@ -350,6 +350,13 @@ function HomePage({ go }) {
           border:"1px solid rgba(8,145,178,.14)", opacity:.7 }} />
         <div style={{ position:"absolute", top:"18%", right:"8%", width:280, height:280, borderRadius:"50%",
           border:"1px solid rgba(8,145,178,.1)" }} />
+           {/* Background logo watermark */}
+        <div style={{ position:"absolute", top:"50%", left:"50%",
+          transform:"translate(-50%,-50%)",
+          opacity:0.10, pointerEvents:"none", zIndex:0 }}>
+          <img src={require('./logo.png')} alt=""
+            style={{ width:700, height:700, objectFit:"contain" }} />
+        </div>
         <div style={{ maxWidth:1200, margin:"0 auto", padding:"72px 24px",
   display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center",
   position:"relative", zIndex:1, width:"100%" }} className="two-col">
@@ -369,9 +376,14 @@ function HomePage({ go }) {
               <span style={{ color:"#22d3ee", fontStyle:"italic" }}>Family Dentist</span><br/>
               in Lalor
             </h1>
-            <p style={{ fontSize:17, color:"rgba(255,255,255,.68)", lineHeight:1.75,
+            <p style={{ fontSize:15, color:"rgba(255,255,255,.55)", lineHeight:1.75,
               marginBottom:36, maxWidth:440 }}>
-              Healthy Smile, Confident You. Dr. Eyad Almashaal brings over 10 years of experience delivering complete dental and aesthetic care for the whole family.
+              <span style={{ display:"block", fontSize:20, fontWeight:700,
+                color:"#22d3ee", marginBottom:10, fontStyle:"italic" }}
+                className="serif">
+                Healthy Smile, Confident You.
+              </span>
+              Dr. Eyad Almashaal brings over 10 years of experience delivering complete dental and aesthetic care for the whole family.
             </p>
             <div style={{ display:"flex", gap:14, flexWrap:"wrap" }}>
               <button className="btn-p" onClick={() => go("book")}
@@ -515,7 +527,7 @@ function HomePage({ go }) {
               letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:18 }}>Meet the Dentist</div>
             <h2 className="serif" style={{ fontSize:"clamp(30px,3.5vw,48px)", color:"#0a3550",
               fontWeight:600, lineHeight:1.12, marginBottom:18 }}>
-              Dr. Eyad<br/>Almashaal
+              Dr. Eyad Almashaal
             </h2>
             <p style={{ fontSize:15, color:"#475569", lineHeight:1.82, marginBottom:14 }}>
               Dr. Almashaal is a dedicated family dentist with over a decade of experience providing high-quality, compassionate dental care to the Lalor community.
@@ -524,7 +536,7 @@ function HomePage({ go }) {
               His gentle, patient-centred approach has helped thousands of patients achieve and maintain healthy, confident smiles — from routine check-ups to complex restorations.
             </p>
             <div style={{ display:"flex", flexDirection:"column", gap:9, marginBottom:30 }}>
-              {["Bachelor of Dental Surgery (BDS)","Member, Australian Dental Association","Focused on family & preventive care"].map(q => (
+              {["Bachelor of Dental Surgery (BDS)","Advanced training in cosmetic injection","Focused on family & preventive care"].map(q => (
                 <div key={q} style={{ display:"flex", alignItems:"center", gap:10 }}>
                   <div style={{ width:20, height:20, borderRadius:"50%", background:"#e0f7fa",
                     display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
@@ -1230,7 +1242,7 @@ function ServicesPage({ go, targetService }) {
       title:"Dental Bridges",
       desc:"A fixed restoration that replaces one or more missing teeth using neighbouring teeth as support.",
       meaning:"A dental bridge fills the gap left by one or more missing teeth. It consists of artificial teeth (pontics) anchored to crowns on the adjacent natural teeth — creating a fixed, non-removable replacement.",
-      includes:["Assessment and treatment planning","Preparation of supporting teeth","Impressions and temporary bridge","Custom bridge fabrication","Permanent cementation"],
+      includes:["Assessment and treatment planning","Preparation of supporting teeth","Digital impressions and temporary bridge","Custom bridge fabrication","Permanent cementation"],
       benefits:["Fixed — does not need to be removed","Restores chewing function and appearance","Prevents neighbouring teeth from shifting","More affordable than implants"],
       risks:["Supporting teeth require preparation (permanent)","Harder to clean under the bridge","May need replacing after 10–15 years"],
       expect:"Similar to crowns, bridges require 2 appointments over 2 weeks. The final result is a fixed, natural-looking replacement for your missing teeth that is easy to live with."
@@ -1277,7 +1289,7 @@ function ServicesPage({ go, targetService }) {
       includes:["Facial assessment and treatment planning","TGA-approved anti-wrinkle product","Precise injection technique","15 to 30 minute appointment","Review appointment if needed"],
       benefits:["Smooths wrinkles without surgery","Natural-looking results","Quick procedure with no downtime","Results last 3 to 4 months","Prevents deepening of lines over time"],
       risks:["Temporary bruising or swelling at injection sites","Headache (rare, short-lived)","Asymmetry if product migrates — very rare with experienced practitioners","Results are temporary — treatment needed every 3–4 months"],
-      expect:"Your appointment takes 15 to 30 minutes. A thorough facial assessment is performed first. Injections are quick with minimal discomfort. Results begin appearing within 3 to 5 days and are fully visible at 2 weeks. No downtime required."
+      expect:"Your appointment takes 15 to 30 minutes. A thorough facial assessment is performed first. Injections are quick with minimal discomfort. Results begin appearing within 7 to 10 days and are fully visible at 2 weeks. No downtime required."
     },
     {
       emoji:"😬", tag:"GENERAL",
@@ -1389,6 +1401,7 @@ function ServicesPage({ go, targetService }) {
       risks:["Minimal risk — protective device","May need replacing as teeth change in children"],
       expect:"We take impressions at one appointment and your custom guard is ready within a week. The fit is checked and any adjustments made. A well-fitted guard should feel secure and comfortable without restricting breathing."
     },
+    /*
     {
       emoji:"😴", tag:"GENERAL",
        photo:"grinding.jpg",
@@ -1400,6 +1413,7 @@ function ServicesPage({ go, targetService }) {
       risks:["Takes 1 to 2 weeks to adjust to wearing","Increased saliva initially","Splint must be cleaned daily"],
       expect:"Impressions are taken at your first appointment. Your splint is ready within 1 to 2 weeks. The fit is carefully checked and adjusted. Most patients notice reduced jaw pain within weeks of regular use."
     },
+    */
     {
       emoji:"🌟", tag:"COSMETIC",
        photo:"smile-design.jpg",
@@ -1493,7 +1507,7 @@ function AboutPage({ go }) {
               padding:"4px 14px", borderRadius:20, fontSize:11, fontWeight:700,
               letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:20 }}>Biography</div>
             <h2 className="serif" style={{ fontSize:42, color:"#0a3550", fontWeight:600, lineHeight:1.1, marginBottom:24 }}>
-              Dr. Eyad<br/>Almashaal
+              Dr. Eyad Almashaal
             </h2>
             {["Dr. Eyad Almashaal is the principal dentist at Lalor Dental Clinic, bringing over a decade of experience in comprehensive family dentistry. He completed his Bachelor of Dental Surgery and has since dedicated his career to providing exceptional dental care to the Lalor community.",
               "With over 10 years of experience, Dr. Almashaal believes great dental care begins with listening — understanding each patient's unique concerns and goals. His gentle, patient-centred approach has helped thousands achieve and maintain healthy, confident smiles.",
@@ -1505,7 +1519,7 @@ function AboutPage({ go }) {
               Qualifications & Memberships
             </h3>
             <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:32 }}>
-              {["Bachelor of Dental Surgery (BDS)","Member, Australian Dental Association (ADA)","Registered with AHPRA","Advanced training in cosmetic dentistry","Certified in oral implantology"].map(q => (
+              {["Bachelor of Dental Surgery (BDS)","Registered with AHPRA","Advanced training in cosmetic injection","Experienced  in oral surgery and dental implants"].map(q => (
                 <div key={q} style={{ display:"flex", alignItems:"center", gap:10 }}>
                   <div style={{ width:22, height:22, borderRadius:"50%", background:"#e0f7fa",
                     display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
@@ -1593,7 +1607,7 @@ function ContactPage() {
             {/* Social icons */}
             <div style={{ display:"flex", gap:10 }}>
               {[
-                { Icon:Facebook, url:"https://www.facebook.com/share/17wqnvDSLT/" },
+                { Icon:Facebook, url:"https://www.facebook.com/share/1HvuCCnwbu/" },
                 { Icon:Instagram, url:"https://www.instagram.com/lalordentalclinic" },
                 { Icon:MessageSquare, url:"https://lalordentalclinic.com.au/#contact" }
               ].map(({Icon,url},i) => (
@@ -1694,7 +1708,7 @@ function BookPage() {
             Book an Appointment
           </h1>
           <p style={{ color:"rgba(255,255,255,.68)", fontSize:17 }}>
-            Powered by Dental4Web — quick, easy, and secure
+            For appointments outside of our regular opening hours, please call us directly and we will do our best to accommodate you.
           </p>
         </div>
       </section>
