@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { supabase } from './supabase';
 import {
   Phone, MapPin, Clock, Mail, Star, ChevronRight, Calendar,
   Shield, Heart, Award, Check, Facebook, Instagram, Smile,
@@ -64,6 +65,7 @@ function Navbar({ page, go, mobileOpen, setMobileOpen }) {
   { id: "offers", label: "Offers" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
+   { id: "register", label: "Register Interest" },
 ];
   return (
     <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:200,
@@ -1607,7 +1609,7 @@ function ContactPage() {
             {/* Social icons */}
             <div style={{ display:"flex", gap:10 }}>
               {[
-                { Icon:Facebook, url:"https://www.facebook.com/share/1HvuCCnwbu/" },
+                { Icon:Facebook, url:"https://www.facebook.com/share/17wqnvDSLT/" },
                 { Icon:Instagram, url:"https://www.instagram.com/lalordentalclinic" },
                 { Icon:MessageSquare, url:"https://lalordentalclinic.com.au/#contact" }
               ].map(({Icon,url},i) => (
@@ -2012,6 +2014,221 @@ function AdminPage({ go }) {
 }
 
 /* ============================================================
+   REGISTER INTEREST PAGE
+   Form saves to Supabase leads table
+   View submissions at supabase.com → Table Editor → leads
+   ============================================================ */
+function RegisterPage() {
+  const [form, setForm] = useState({
+    full_name:"", email:"", phone:"", message:""
+  });
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const e = {};
+    if (!form.full_name.trim()) e.full_name = "Full name is required";
+    if (!form.phone.trim()) e.phone = "Phone number is required";
+    if (form.email && !/\S+@\S+\.\S+/.test(form.email))
+      e.email = "Please enter a valid email";
+    return e;
+  };
+
+  const handleSubmit = async () => {
+    const e = validate();
+    if (Object.keys(e).length > 0) { setErrors(e); return; }
+    setLoading(true);
+    setErrors({});
+    try {
+      const { error } = await supabase
+        .from('leads')
+        .insert([{
+          full_name: form.full_name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          message: form.message.trim()
+        }]);
+      if (error) throw error;
+      setStatus("success");
+      setForm({ full_name:"", email:"", phone:"", message:"" });
+    } catch (err) {
+      setStatus("error");
+    }
+    setLoading(false);
+  };
+
+  const inputStyle = (field) => ({
+    width:"100%", padding:"12px 14px", borderRadius:10,
+    border:`1px solid ${errors[field]?"#ef4444":"#e2e8f0"}`,
+    fontSize:14, outline:"none", fontFamily:"'DM Sans',sans-serif",
+    transition:"border .2s"
+  });
+
+  return (
+    <div className="page-enter" style={{ paddingTop:68 }}>
+      {/* Hero */}
+      <section style={{ padding:"72px 24px 56px",
+        background:"linear-gradient(135deg,#0a3550,#0e7490)",
+        textAlign:"center", position:"relative" }}>
+        <div className="dot-bg" style={{ position:"absolute", inset:0, opacity:.35 }} />
+        <div style={{ position:"relative" }}>
+          <h1 className="serif" style={{ fontSize:"clamp(34px,5vw,60px)",
+            color:"white", fontWeight:600, marginBottom:10 }}>
+            Register Your Interest
+          </h1>
+          <p style={{ color:"rgba(255,255,255,.68)", fontSize:17,
+            maxWidth:500, margin:"0 auto" }}>
+            Leave your details and we will be in touch shortly.
+          </p>
+        </div>
+      </section>
+
+      {/* Form */}
+      <section style={{ padding:"72px 24px", background:"#f8fafc" }}>
+        <div style={{ maxWidth:580, margin:"0 auto" }}>
+          {status === "success" ? (
+            <div style={{ background:"white", borderRadius:22,
+              padding:"56px 40px", textAlign:"center",
+              boxShadow:"0 8px 40px rgba(10,53,80,.08)" }}>
+              <div style={{ fontSize:64, marginBottom:16 }}>✅</div>
+              <h2 className="serif" style={{ fontSize:28, color:"#0a3550",
+                fontWeight:700, marginBottom:12 }}>
+                Thank You!
+              </h2>
+              <p style={{ fontSize:15, color:"#64748b", lineHeight:1.7,
+                marginBottom:28 }}>
+                We have received your details and will be in touch with you shortly.
+              </p>
+              <button className="btn-p"
+                onClick={() => setStatus(null)}
+                style={{ padding:"12px 28px", borderRadius:10,
+                  fontSize:14, fontWeight:600, border:"none", cursor:"pointer" }}>
+                Submit Another
+              </button>
+            </div>
+          ) : (
+            <div style={{ background:"white", borderRadius:22,
+              padding:"40px 36px",
+              boxShadow:"0 8px 40px rgba(10,53,80,.08)",
+              border:"1px solid rgba(14,116,144,.07)" }}>
+              <h2 className="serif" style={{ fontSize:26, color:"#0a3550",
+                fontWeight:600, marginBottom:6 }}>
+                Your Details
+              </h2>
+              <p style={{ fontSize:14, color:"#64748b", marginBottom:28 }}>
+                Fill in the form below and our team will contact you soon.
+              </p>
+
+              {status === "error" && (
+                <div style={{ background:"#fee2e2", border:"1px solid #fca5a5",
+                  borderRadius:10, padding:"12px 16px", marginBottom:20,
+                  fontSize:13, color:"#dc2626" }}>
+                  Something went wrong. Please try again or call us on 0382 567 501.
+                </div>
+              )}
+
+              {/* Full Name */}
+              <div style={{ marginBottom:16 }}>
+                <label style={{ fontSize:11, fontWeight:700, color:"#64748b",
+                  textTransform:"uppercase", letterSpacing:"0.07em",
+                  display:"block", marginBottom:5 }}>
+                  Full Name *
+                </label>
+                <input type="text" value={form.full_name}
+                  placeholder="John Smith"
+                  onChange={e => setForm({...form, full_name:e.target.value})}
+                  style={inputStyle("full_name")}
+                  onFocus={e=>e.target.style.borderColor="#0891b2"}
+                  onBlur={e=>e.target.style.borderColor=errors.full_name?"#ef4444":"#e2e8f0"} />
+                {errors.full_name && (
+                  <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>
+                    {errors.full_name}
+                  </div>
+                )}
+              </div>
+
+              {/* Phone */}
+              <div style={{ marginBottom:16 }}>
+                <label style={{ fontSize:11, fontWeight:700, color:"#64748b",
+                  textTransform:"uppercase", letterSpacing:"0.07em",
+                  display:"block", marginBottom:5 }}>
+                  Phone Number *
+                </label>
+                <input type="tel" value={form.phone}
+                  placeholder="0400 000 000"
+                  onChange={e => setForm({...form, phone:e.target.value})}
+                  style={inputStyle("phone")}
+                  onFocus={e=>e.target.style.borderColor="#0891b2"}
+                  onBlur={e=>e.target.style.borderColor=errors.phone?"#ef4444":"#e2e8f0"} />
+                {errors.phone && (
+                  <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>
+                    {errors.phone}
+                  </div>
+                )}
+              </div>
+
+              {/* Email */}
+              <div style={{ marginBottom:16 }}>
+                <label style={{ fontSize:11, fontWeight:700, color:"#64748b",
+                  textTransform:"uppercase", letterSpacing:"0.07em",
+                  display:"block", marginBottom:5 }}>
+                  Email Address
+                </label>
+                <input type="email" value={form.email}
+                  placeholder="john@email.com"
+                  onChange={e => setForm({...form, email:e.target.value})}
+                  style={inputStyle("email")}
+                  onFocus={e=>e.target.style.borderColor="#0891b2"}
+                  onBlur={e=>e.target.style.borderColor=errors.email?"#ef4444":"#e2e8f0"} />
+                {errors.email && (
+                  <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>
+                    {errors.email}
+                  </div>
+                )}
+              </div>
+
+              {/* Message */}
+              <div style={{ marginBottom:28 }}>
+                <label style={{ fontSize:11, fontWeight:700, color:"#64748b",
+                  textTransform:"uppercase", letterSpacing:"0.07em",
+                  display:"block", marginBottom:5 }}>
+                  Message / How can we help?
+                </label>
+                <textarea value={form.message}
+                  placeholder="I am interested in teeth whitening..."
+                  rows={4}
+                  onChange={e => setForm({...form, message:e.target.value})}
+                  style={{ ...inputStyle("message"), resize:"vertical" }}
+                  onFocus={e=>e.target.style.borderColor="#0891b2"}
+                  onBlur={e=>e.target.style.borderColor="#e2e8f0"} />
+              </div>
+
+              {/* Submit */}
+              <button className="btn-p"
+                onClick={handleSubmit}
+                disabled={loading}
+                style={{ padding:"14px", borderRadius:10, fontSize:15,
+                  fontWeight:700, width:"100%", border:"none",
+                  cursor:loading?"not-allowed":"pointer",
+                  opacity:loading?0.7:1 }}>
+                {loading ? "Submitting..." : "Submit Details →"}
+              </button>
+
+              <p style={{ fontSize:11, color:"#94a3b8", textAlign:"center",
+                marginTop:14, lineHeight:1.6 }}>
+                Your details are kept private and secure. We will never share your information.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+/* ============================================================
    FOOTER — Edit contact info, hours, and links here
    ============================================================ */
 function Footer({ go }) {
@@ -2028,20 +2245,27 @@ function Footer({ go }) {
               Healthy Smile, Confident You. Serving Lalor and northern Melbourne suburbs with over 10 years of experience in dental and aesthetic care.
             </p>
             <div style={{ display:"flex", gap:9 }}>
-              {[Facebook,Instagram,MessageSquare].map((Icon,i) => (
-                <div key={i} style={{ width:34, height:34, borderRadius:8,
-                  background:"rgba(255,255,255,.07)", display:"flex",
-                  alignItems:"center", justifyContent:"center", cursor:"pointer" }}>
-                  <Icon size={14} color="rgba(255,255,255,.65)" />
-                </div>
-              ))}
+              {[
+  { Icon:Facebook, url:"https://www.facebook.com/share/17wqnvDSLT/" },
+  { Icon:Instagram, url:"https://www.instagram.com/lalordentalclinic" },
+  { Icon:MessageSquare, url:"https://wa.me/61382567501" }
+].map(({Icon,url},i) => (
+  <a key={i} href={url} target="_blank" rel="noopener noreferrer"
+    style={{ width:42, height:42, borderRadius:11, background:"#0a3550",
+      display:"flex", alignItems:"center", justifyContent:"center",
+      cursor:"pointer", textDecoration:"none",
+      transition:"background .2s" }}
+    onMouseEnter={e=>e.currentTarget.style.background="#0891b2"}
+    onMouseLeave={e=>e.currentTarget.style.background="#0a3550"}>
+    <Icon size={17} color="white" />
+  </a>
+))}
             </div>
           </div>
           <div>
             <div style={{ color:"white", fontWeight:600, fontSize:13,
               marginBottom:16, letterSpacing:"0.06em", textTransform:"uppercase" }}>Quick Links</div>
-            {[["home","Home"],["services","Services"],["offers","Offers"],["about","About"],["contact","Contact"],["book","Book Appointment"]].map(([id,label]) => (
-              <div key={id} onClick={()=>go(id)}
+              {[["home","Home"],["services","Services"],["offers","Offers"],["about","About"],["contact","Contact"],["register","Register Interest"],["book","Book Appointment"]].map(([id,label]) => (              <div key={id} onClick={()=>go(id)}
                 style={{ fontSize:13, marginBottom:9, cursor:"pointer", transition:"color .2s" }}
                 onMouseEnter={e=>e.currentTarget.style.color="#22d3ee"}
                 onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,.6)"}>
@@ -2115,6 +2339,7 @@ const go = (p, service = null) => {
       {page === "home" && <HomePage go={go} />}
       {page === "services" && <ServicesPage go={go} targetService={targetService} />}
       {page === "offers" && <OffersPage go={go} />}
+      {page === "register" && <RegisterPage />}
       {page === "about" && <AboutPage go={go} />}
       {page === "contact" && <ContactPage />}
       {page === "book" && <BookPage />}

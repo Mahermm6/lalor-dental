@@ -1,0 +1,6 @@
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = 'https://ykorbqekwrpkoqmdttxj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrb3JicWVrd3Jwa29xbWR0dHhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2Njg2NTgsImV4cCI6MjEwNjI0NDY1OH0.txYZJbl93b88MW030JJ5WW3WrHLulene1Y1dhgqL6lg';
+
+export const supabase = createClient('https://ykorbqekwrpkoqmdttxj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrb3JicWVrd3Jwa29xbWR0dHhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2Njg2NTgsImV4cCI6MjEwNjI0NDY1OH0.txYZJbl93b88MW030JJ5WW3WrHLulene1Y1dhgqL6lg');
