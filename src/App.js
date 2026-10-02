@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from './supabase';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import {
   Phone, MapPin, Clock, Mail, Star, ChevronRight, Calendar,
   Shield, Heart, Award, Check, Facebook, Instagram, Smile,
@@ -256,7 +257,7 @@ function FAQList() {
 
 
 function HomePage({ go }) {
-  const [activeTesti, setActiveTesti] = useState(0);
+  //const [activeTesti, setActiveTesti] = useState(0);
   const services = [
     { icon:<Sparkles size={26}/>, title:"Cosmetic & Aesthetic Procedures", desc:"Beyond your smile — we offer facial aesthetics including anti-wrinkle injections (Botox), dermal fillers, lip enhancement, and skin rejuvenation treatments for a naturally refreshed look." },
     { icon:<Smile size={26}/>, title:"General Check-ups", desc:"Comprehensive exams for the whole family, including digital X-rays and cancer screening." },
@@ -266,11 +267,11 @@ function HomePage({ go }) {
     { icon:<Heart size={26}/>, title:"Family Dentistry", desc:"Gentle, patient care for children and adults of all ages." },
     { icon:<Eye size={26}/>, title:"Cosmetic Dentistry", desc:"Smile makeovers, veneers, and bonding tailored to your goals." },
   ];
-  const testi = [
+  /*const testi = [
     { name:"Sarah M.", stars:5, text:"Dr. Eyad is absolutely wonderful with my children. They actually look forward to dental visits now! The clinic is spotless and the whole team is so warm." },
     { name:"James T.", stars:5, text:"I had been avoiding the dentist for years due to anxiety. Dr. Almashaal made me feel completely at ease — I couldn't believe how comfortable the whole experience was." },
     { name:"Priya K.", stars:5, text:"Best dental clinic I've visited. Modern equipment, genuinely caring staff, and Dr. Eyad takes time to explain every step clearly. Highly recommend to everyone." },
-  ];
+  ];*/
   const reasons = [
     { icon:<Award size={22}/>, title:"Experienced Dentist", desc:"10+ years of comprehensive family and cosmetic dental expertise" },
     { icon:<Zap size={22}/>, title:"Modern Technology", desc:"State-of-the-art digital X-rays and treatment equipment" },
@@ -1033,7 +1034,7 @@ function OffersPage({ go }) {
               {/* Top section */}
               <div style={{ padding:"28px 24px 20px" }}>
                 {o.photo && (
-  <div style={{ width:"100%", height:200, overflow:"hidden",
+  <div style={{ height:200, overflow:"hidden",
     borderRadius:"12px 12px 0 0", marginBottom:16, marginTop:-28,
     marginLeft:-24, marginRight:-24, width:"calc(100% + 48px)" }}>
     <img src={require(`./images/${o.photo}`)}
@@ -2246,20 +2247,20 @@ function Footer({ go }) {
             </p>
             <div style={{ display:"flex", gap:9 }}>
               {[
-  { Icon:Facebook, url:"https://www.facebook.com/share/17wqnvDSLT/" },
-  { Icon:Instagram, url:"https://www.instagram.com/lalordentalclinic" },
-  { Icon:MessageSquare, url:"https://wa.me/61382567501" }
-].map(({Icon,url},i) => (
-  <a key={i} href={url} target="_blank" rel="noopener noreferrer"
-    style={{ width:42, height:42, borderRadius:11, background:"#0a3550",
-      display:"flex", alignItems:"center", justifyContent:"center",
-      cursor:"pointer", textDecoration:"none",
-      transition:"background .2s" }}
-    onMouseEnter={e=>e.currentTarget.style.background="#0891b2"}
-    onMouseLeave={e=>e.currentTarget.style.background="#0a3550"}>
-    <Icon size={17} color="white" />
-  </a>
-))}
+                { Icon:Facebook, url:"https://www.facebook.com/share/17wqnvDSLT/" },
+                { Icon:Instagram, url:"https://www.instagram.com/lalordentalclinic" },
+                { Icon:MessageSquare, url:"https://wa.me/61382567501" }
+              ].map(({Icon,url},i) => (
+                <a key={i} href={url} target="_blank" rel="noopener noreferrer"
+                  style={{ width:42, height:42, borderRadius:11, background:"#0a3550",
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    cursor:"pointer", textDecoration:"none",
+                    transition:"background .2s" }}
+                  onMouseEnter={e=>e.currentTarget.style.background="#0891b2"}
+                  onMouseLeave={e=>e.currentTarget.style.background="#0a3550"}>
+                  <Icon size={17} color="white" />
+                </a>
+              ))}
             </div>
           </div>
           <div>
@@ -2319,32 +2320,69 @@ function Footer({ go }) {
 /* ============================================================
    APP ROOT — Page routing and global layout
    ============================================================ */
-export default function App() {
- const [page, setPage] = useState("home");
-const [mobileOpen, setMobileOpen] = useState(false);
-const [targetService, setTargetService] = useState(null);
-const go = (p, service = null) => { 
-  setPage(p); 
-  setMobileOpen(false); 
-  setTargetService(service);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+function AppContent() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [targetService, setTargetService] = useState(null);
+
+  const go = (p, service = null) => {
+    setMobileOpen(false);
+    setTargetService(service);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const routes = {
+      home: "/",
+      services: "/services",
+      offers: "/offers",
+      about: "/about",
+      contact: "/contact",
+      book: "/book",
+      register: "/register",
+      admin: "/admin"
+    };
+    navigate(routes[p] || "/");
+  };
+
+  const currentPage = {
+    "/": "home",
+    "/services": "services",
+    "/offers": "offers",
+    "/about": "about",
+    "/contact": "contact",
+    "/book": "book",
+    "/register": "register",
+    "/admin": "admin"
+  }[location.pathname] || "home";
+
+  const isAdmin = location.pathname === "/admin";
 
   return (
     <div>
       <GlobalStyles />
-      {page !== "admin" && (
-        <Navbar page={page} go={go} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+      {!isAdmin && (
+        <Navbar page={currentPage} go={go}
+          mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       )}
-      {page === "home" && <HomePage go={go} />}
-      {page === "services" && <ServicesPage go={go} targetService={targetService} />}
-      {page === "offers" && <OffersPage go={go} />}
-      {page === "register" && <RegisterPage />}
-      {page === "about" && <AboutPage go={go} />}
-      {page === "contact" && <ContactPage />}
-      {page === "book" && <BookPage />}
-      {page === "admin" && <AdminPage go={go} />}
-      {page !== "admin" && <Footer go={go} />}
+      <Routes>
+        <Route path="/" element={<HomePage go={go} />} />
+        <Route path="/services" element={<ServicesPage go={go} targetService={targetService} />} />
+        <Route path="/offers" element={<OffersPage go={go} />} />
+        <Route path="/about" element={<AboutPage go={go} />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/book" element={<BookPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/admin" element={<AdminPage go={go} />} />
+        <Route path="*" element={<HomePage go={go} />} />
+      </Routes>
+      {!isAdmin && <Footer go={go} />}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
